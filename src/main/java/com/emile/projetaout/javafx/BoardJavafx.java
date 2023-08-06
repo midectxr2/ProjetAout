@@ -35,4 +35,8 @@ public class BoardJavafx extends Parent {
     public Grille getGrille() {
         return grille;
     }
+
+    public VBox getRowss() {
+        return rowss;
+    }
 }

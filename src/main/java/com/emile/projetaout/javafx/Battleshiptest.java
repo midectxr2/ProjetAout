@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -29,11 +30,14 @@ public class Battleshiptest extends Parent {
     Cellule cellule;
 
 
-    public Parent createContent(){
+    public Parent createContent(int ligne, int colonnes, List<Integer> list){
         BorderPane root = new BorderPane();
         root.setPrefSize(600, 800);
 
-        jeu = new Jeu(10, 10, Arrays.asList(3, 3, 3, 3, 3, 3, 3));
+        jeu = new Jeu(ligne, colonnes, list);
+
+
+
 
         enemyGrid = new BoardJavafx(jeu.getP1().getGrille());
         playerGrid = new BoardJavafx(jeu.getP2().getGrille());
@@ -76,29 +80,21 @@ public class Battleshiptest extends Parent {
     }
 
     public void allowCheat(){
-
-
-
-
+        for(int i = 0; i < enemyGrid.getRowss().getChildren().size(); i++) {
+            HBox ligne = (HBox) enemyGrid.getRowss().getChildren().get(i);
+            for (int j = 0; j < ligne.getChildren().size(); j++) {
+                CelluleJavafx celluleJavafx1 = (CelluleJavafx) ligne.getChildren().get(j);
+                celluleJavafx1.allowCheat();
+            }
+        }
     }
 
     public void disallowCheat(){
-        Player p1 = jeu.getP1();
-        Player p2 = jeu.getP2();
-        List<Bateau> bateauListP1 = p1.getBateaux();
-        List<Bateau> bateauListP2 = p2.getBateaux();
-        for(Bateau bateau: bateauListP1){
-            List<Cellule> ListCelluleP1 = bateau.getCellules();
-            for(Cellule cellule1: ListCelluleP1){
-                CelluleJavafx newcellule = new CelluleJavafx(cellule1);
-                newcellule.setFill(Color.LIGHTGRAY);
-            }
-        }
-        for(Bateau bateau: bateauListP2){
-            List<Cellule> ListCelluleP2 = bateau.getCellules();
-            for(Cellule cellule1: ListCelluleP2){
-                CelluleJavafx newcellule1 = new CelluleJavafx(cellule1);
-                newcellule1.setFill(Color.LIGHTGRAY);
+        for(int i = 0; i < enemyGrid.getRowss().getChildren().size(); i++) {
+            HBox ligne = (HBox) enemyGrid.getRowss().getChildren().get(i);
+            for (int j = 0; j < ligne.getChildren().size(); j++) {
+                CelluleJavafx celluleJavafx1 = (CelluleJavafx) ligne.getChildren().get(j);
+                celluleJavafx1.disallowCheat();
             }
         }
     }

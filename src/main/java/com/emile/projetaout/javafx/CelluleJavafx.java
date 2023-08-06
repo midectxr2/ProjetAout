@@ -37,5 +37,15 @@ public class CelluleJavafx extends Rectangle {
         }
     }
 
+    public void allowCheat(){
+        updateView();
+    }
 
+    public void disallowCheat(){
+        if(cellule.estTouchee()){
+            updateView();
+        }else{
+            this.setFill(Color.LIGHTGRAY);
+        }
+    }
 }

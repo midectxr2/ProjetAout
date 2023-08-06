@@ -1,13 +1,13 @@
 package com.emile.projetaout.logiquetest;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Jeu {
     private Player p1;
     private Player p2;
     private boolean myTurn = true;
+    Random random = new Random();
+
 
    public Jeu(int lignes, int colonnes, List<Integer> taillesBateaux) {
         p1 = new Player(new Grille(lignes, colonnes),  taillesBateaux);
@@ -66,6 +66,7 @@ public class Jeu {
             }
         }
 
+
     }
 
     public void jouerTourp1(int x, int y) {
@@ -78,6 +79,29 @@ public class Jeu {
 
    public boolean isFinished(){
        return p1.estTermine() || p2.estTermine();
+   }
+
+   public static void main(String[] args){
+       int lig = 10;
+       int col = 10;
+       Jeu jeu = new Jeu(lig , col , Arrays.asList(2));
+       System.out.println("DEBUT DU JEU");
+       jeu.getP2().getGrille().cheatMode();
+       while(!jeu.isFinished()){
+            if (jeu.myTurn){
+                jeu.jouerTourp1();
+
+            }else{
+                jeu.jouerTourp2();
+            }
+       }
+       boolean p1Win = !jeu.p1.estTermine();
+       System.out.println("Fin du jeu");
+       if (p1Win){
+           System.out.println("Le joueur a win");
+       } else{
+           System.out.println("l'ordi a win");
+       }
    }
 }
 

@@ -181,6 +181,7 @@ public class Grille {
             }
             System.out.println();
         }
+        System.out.println("\n");
     }
 }
 
