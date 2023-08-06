@@ -39,17 +39,12 @@ public class Cellule {
     }
 
     public void tirerSur() {
-        if(this.etat) return;
-        else{
+        if(this.etat){
             this.etat = true;
             if (this.bateau != null) {
                 this.bateau.toucher();
             }
         }
     }
-
-
-
-
 }
 

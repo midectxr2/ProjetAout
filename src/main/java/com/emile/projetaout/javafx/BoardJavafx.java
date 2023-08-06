@@ -23,7 +23,13 @@ public class BoardJavafx extends Parent {
                 CelluleJavafx celluleJavafx1 = new CelluleJavafx(grille.getCellules(x, y));
                 rows.getChildren().add(celluleJavafx1);
                 celluleJavafx1.setOnMouseClicked(e -> {
-                    celluleJavafx1.updateView();
+                    celluleJavafx1.tirerSur();
+                    if(player.estTermine()) {
+                        System.out.println();
+                    }
+                    else{
+
+                    }
                 });
             }
             rowss.getChildren().add(rows);

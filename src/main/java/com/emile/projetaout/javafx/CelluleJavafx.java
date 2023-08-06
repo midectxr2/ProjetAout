@@ -20,16 +20,19 @@ public class CelluleJavafx extends Rectangle {
     private Player player;
 
     public CelluleJavafx(Cellule cellule){
-
         setWidth(30);
         setHeight(30);
         this.setFill(Color.LIGHTGRAY);
         this.setStroke(Color.BLACK);
         this.cellule = cellule;
-
     }
-    public void updateView(){
+
+    public void tirerSur(){
         cellule.tirerSur();
+        updateView();
+    }
+
+    public void updateView(){
         if(cellule.getBateau() == null){
             this.setFill(Color.BLUE);
         }else{

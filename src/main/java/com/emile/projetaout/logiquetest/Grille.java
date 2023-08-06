@@ -138,24 +138,24 @@ public class Grille {
     }
 
 
-    public void tirer(int x, int y) {
+    public boolean tirer(int x, int y) {
         System.out.println("Je tire en : " + x + " - "+ y);
 
         // Vérifiez si la position est dans la grille.
         if (x < 0 || y < 0 || x >= lignes || y >= colonnes) {
-            throw new IllegalArgumentException("Position hors de la grille.");
+            return false;
         }
 
         Cellule cellule = cellules[x][y];
 
         // Vérifiez si la cellule a déjà été touchée.
         if (cellule.estTouchee()) {
-            throw new IllegalArgumentException("Cellule déjà touchée.");
+            return false;
         }
 
         // Marquez la cellule comme étant touchée.
         cellule.tirerSur();
-
+        return true;
         // Si la cellule contient un bateau, informez le bateau qu'il a été touché.
         /*Bateau bateau = cellule.getBateau();
         if (bateau != null) {
@@ -182,6 +182,22 @@ public class Grille {
             System.out.println();
         }
         System.out.println("\n");
+    }
+
+    public void cheatMode() {
+        for (int i = 0; i < lignes; i++) {
+            for (int j = 0; j < colonnes; j++) {
+                    //System.out.println(cellules[i][j].toString());
+
+                    if (cellules[i][j].getBateau() != null) {
+                        System.out.print("O "); // Tir réussi
+                    } else {
+                        System.out.print("X "); // Tir manqué
+                    }
+                }
+            System.out.println();
+        }
+        System.out.println();
     }
 }
 

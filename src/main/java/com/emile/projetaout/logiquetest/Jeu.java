@@ -9,7 +9,7 @@ public class Jeu {
     Random random = new Random();
 
 
-   public Jeu(int lignes, int colonnes, List<Integer> taillesBateaux) {
+    public Jeu(int lignes, int colonnes, List<Integer> taillesBateaux) {
         p1 = new Player(new Grille(lignes, colonnes),  taillesBateaux);
         p2 = new Player(new Grille(lignes, colonnes),  taillesBateaux);
 
@@ -29,7 +29,6 @@ public class Jeu {
     }
 
     private void initialiserJeu() {
-        Random random = new Random();
 
         for (Bateau bateau : p1.getBateaux()) {
             while (true) {
@@ -69,12 +68,62 @@ public class Jeu {
 
     }
 
-    public void jouerTourp1(int x, int y) {
-        this.p1.getGrille().tirer(x, y);
+    public void jouerTourp1() {
+        //Demande a l'utilisateur les coordonnées
+        System.out.println("Entrez la ligne");
+        Scanner sc = new Scanner(System.in);
+        int x = sc.nextInt();
+        System.out.println("Entrez la colonne");
+        int y = sc.nextInt();
+        clearConsole();
+        System.out.println("Vous avez tiré en x: "+x+", y: "+y);
+
+        while (!this.p2.getGrille().tirer(x, y)){
+            System.out.println("Entrez une valeur correcte");
+            System.out.println("Entrez la ligne");
+            x = sc.nextInt();
+            System.out.println("Entrez la colonne");
+             y = sc.nextInt();
+            clearConsole();
+            System.out.println("Vous avez tiré en x: "+x+", y: "+y);
+        }
+
+        this.p2.getGrille().afficherGrille();
+        myTurn = !myTurn;
     }
 
-    public void jouerTourp2(int x, int y) {
-        this.p2.getGrille().tirer(x, y);
+    public void jouerTourp2() {
+        int x = random.nextInt(p1.getGrille().getLignes());
+        int y = random.nextInt(p1.getGrille().getColonnes());
+
+
+        while (!this.p1.getGrille().tirer(x, y)){
+             x = random.nextInt(p1.getGrille().getLignes());
+             y = random.nextInt(p1.getGrille().getColonnes());
+        }
+
+        System.out.println("l'ordi a tiré en x: "+x+", y: "+y);
+        this.p1.getGrille().afficherGrille();
+        myTurn = !myTurn;
+
+    }
+
+    public  void clearConsole() {
+        try {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows")) {
+                // Commande pour Windows
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                // Commande pour UNIX
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (final Exception e) {
+            // Gérer l'exception
+            e.printStackTrace();
+        }
     }
 
    public boolean isFinished(){
