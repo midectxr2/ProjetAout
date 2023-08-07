@@ -101,8 +101,11 @@ public class Battleshiptest extends Parent {
     }
 
 
+    public Jeu getJeu() {
+        return jeu;
+    }
 
-
-
-
+    public BoardJavafx getPlayerGrid() {
+        return playerGrid;
+    }
 }

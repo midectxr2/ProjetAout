@@ -26,32 +26,14 @@ public class Menu extends Application{
     public void start(Stage stage) throws IOException {
         mainStage = stage;
         showMainMenu();
-    /*
-        Pane root = new Pane();
-        root.setPrefSize(600, 800);
-        gamemenu = new GameMenu();
-        gamemenu.setVisible(true);
 
-        InputStream is = Files.newInputStream(Paths.get("src/main/resources/images/background.jpg"));
-        Image img = new Image(is);
-        is.close();
-        ImageView imgV = new ImageView(img);
-        imgV.setFitHeight(800);
-        imgV.setFitWidth(600);
-
-        root.getChildren().addAll(imgV, gamemenu);
-        Scene scene = new Scene(root);
-        stage.setTitle("Menu");
-        stage.setScene(scene);
-        stage.show();
-    */
     }
     private void startGame() {
         Battleshiptest gameScreen = new Battleshiptest();
 
         // définir les actions nécessaires pour les boutons de l'écran du jeu ici
 
-        Scene gameScene = new Scene(gameScreen.createContent(10, 10, Arrays.asList(3, 3, 3, 3, 3, 3, 3)), 600, 800);
+        Scene gameScene = new Scene(gameScreen.createContent(10, 10, Arrays.asList(3)), 600, 800);
 
         mainStage.setScene(gameScene);
     }
