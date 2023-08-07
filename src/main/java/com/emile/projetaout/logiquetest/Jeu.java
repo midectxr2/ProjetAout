@@ -139,7 +139,6 @@ public class Jeu {
        while(!jeu.isFinished()){
             if (jeu.myTurn){
                 jeu.jouerTourp1();
-
             }else{
                 jeu.jouerTourp2();
             }

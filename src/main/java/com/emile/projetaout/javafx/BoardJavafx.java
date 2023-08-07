@@ -1,23 +1,29 @@
 package com.emile.projetaout.javafx;
 
 import com.emile.projetaout.logiquetest.Grille;
+import com.emile.projetaout.logiquetest.Jeu;
 import com.emile.projetaout.logiquetest.Player;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.Random;
+
 public class BoardJavafx extends Parent {
+    private Battleshiptest jeu;
     private Grille grille;
     private VBox rowss = new VBox();
-    private Player player;
+    Random random = new Random();
 
+    boolean isPlayer;
 
-    public BoardJavafx(Grille grille) {
+    public BoardJavafx(Battleshiptest jeu, Grille grille, boolean isPlayer) {
+        this.jeu = jeu;
         this.grille = grille;
+        this.isPlayer = isPlayer;
 
-
-
-        for (int x = 0; x < grille.getLignes(); x++) {
+        for (int x = 0; x <grille.getLignes(); x++) {
             HBox rows = new HBox();
             for (int y = 0; y < grille.getColonnes(); y++) {
                 CelluleJavafx celluleJavafx1 = new CelluleJavafx(grille.getCellules(x, y));

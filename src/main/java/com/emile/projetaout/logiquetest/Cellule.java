@@ -38,13 +38,15 @@ public class Cellule {
         this.bateau = bateau;
     }
 
-    public void tirerSur() {
-        if(this.etat){
+    public boolean tirerSur() {
+        if(!estTouchee()){
             this.etat = true;
             if (this.bateau != null) {
                 this.bateau.toucher();
             }
+            return true;
         }
+        return false;
     }
 }
 

@@ -148,14 +148,10 @@ public class Grille {
 
         Cellule cellule = cellules[x][y];
 
-        // Vérifiez si la cellule a déjà été touchée.
-        if (cellule.estTouchee()) {
-            return false;
-        }
-
         // Marquez la cellule comme étant touchée.
-        cellule.tirerSur();
-        return true;
+        // Return false et ne tire pas sur la cellule si la cellule a deja ete toucher
+        return cellule.tirerSur();
+
         // Si la cellule contient un bateau, informez le bateau qu'il a été touché.
         /*Bateau bateau = cellule.getBateau();
         if (bateau != null) {

@@ -27,9 +27,10 @@ public class CelluleJavafx extends Rectangle {
         this.cellule = cellule;
     }
 
-    public void tirerSur(){
-        cellule.tirerSur();
+    public boolean tirerSur(){
+        boolean res = cellule.tirerSur();
         updateView();
+        return res;
     }
 
     public void updateView(){
