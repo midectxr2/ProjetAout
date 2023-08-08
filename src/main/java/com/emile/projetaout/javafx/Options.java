@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Options extends VBox {
@@ -21,13 +22,7 @@ public class Options extends VBox {
     private final int DEFAULT_VALUE = 10;
     private int res_col = DEFAULT_VALUE;
     private int res_row = DEFAULT_VALUE;
-
-    List<Integer> listBoats= new ArrayList<>();
-
-
-
-
-
+    private VBox vBox1 = new VBox();
 
     public Options() {
 
@@ -43,9 +38,6 @@ public class Options extends VBox {
         Text gridLength = new Text("Taille Grille: ");
         Text row_length = new Text("Lignes: ");
         Text col_length = new Text("Colonnes: ");
-
-
-
 
 
         col = new ChoiceBox(FXCollections.observableArrayList("5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"));
@@ -64,18 +56,14 @@ public class Options extends VBox {
                 (ObservableValue<? extends Number> ov,
                  Number old_val, Number new_val) -> {
                     res_row = value[new_val.intValue()];
-
                 }
         );
+
         row.setValue(DEFAULT_VALUE);
-
         hBox_grid.getChildren().addAll(gridLength, row_length, row, col_length, col);
-
-
 
         int res;
 
-        VBox vBox1 = new VBox();
         for(int i=1; i<7;i++){
             HBox newHbox = new HBox();
             newHbox.setSpacing(10);
@@ -83,9 +71,7 @@ public class Options extends VBox {
             vBox1.getChildren().addAll(display);
         }
 
-
         Text boatLength = new Text("Taille Bateaux: ");
-
 
         vBox.getChildren().addAll(returnButton, hBox_grid, boatLength, vBox1, startButton);
 
@@ -109,6 +95,15 @@ public class Options extends VBox {
 
     }
 
+    public ArrayList<Integer> getBoat(){
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < vBox1.getChildren().size(); i++ ){
+            for (int j = 0; j < ((Display) vBox1.getChildren().get(i)).getNumber(); j++ ){
+                list.add( i+1 );
+            }
+        }
+        return list;
+    }
 
 
 }

@@ -15,9 +15,6 @@ public class GameMenu extends Parent {
         VBox menu = new VBox(10);
 
 
-
-
-
         menu.getChildren().addAll(play, options, exit);
         getChildren().addAll(menu);
 

@@ -54,8 +54,7 @@ public class Menu extends Application{
         optionsScreen.getStartButton().setOnMouseClicked(event -> {
             int col = optionsScreen.getRes_col();
             int row = optionsScreen.getRes_row();
-            List<Integer> integerList = optionsScreen.listBoats;
-
+            List<Integer> integerList = optionsScreen.getBoat();
 
             startGame(row, col, integerList);
         });
