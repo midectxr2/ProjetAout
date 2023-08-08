@@ -41,6 +41,6 @@ public class Display {
     }
 
     public int getNumber() {
-        return number;
+        return number-1;
     }
 }

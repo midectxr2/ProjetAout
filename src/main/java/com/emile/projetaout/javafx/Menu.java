@@ -13,6 +13,9 @@ public class Menu extends Application{
 
     private Stage mainStage;
 
+    private int width = 1400;
+    private int height = 1000;
+
 
 
 
@@ -27,7 +30,7 @@ public class Menu extends Application{
 
         // définir les actions nécessaires pour les boutons de l'écran du jeu ici
 
-        Scene gameScene = new Scene(gameScreen.createContent(10, 10, Arrays.asList(5, 4, 3, 3, 2)), 600, 800);
+        Scene gameScene = new Scene(gameScreen.createContent(10, 10, Arrays.asList(5, 4, 3, 3, 2)), width, height);
 
         mainStage.setScene(gameScene);
     }
@@ -37,7 +40,7 @@ public class Menu extends Application{
         Battleshiptest gameScreen = new Battleshiptest();
 
         // définir les actions nécessaires pour les boutons de l'écran du jeu ici
-        Scene gameScene = new Scene(gameScreen.createContent(row, col, boatList), 600, 800);
+        Scene gameScene = new Scene(gameScreen.createContent(row, col, boatList), width, height);
 
         mainStage.setScene(gameScene);
     }
@@ -59,7 +62,7 @@ public class Menu extends Application{
 
         // définir les actions nécessaires pour les boutons de l'écran d'options ici
 
-        Scene optionsScene = new Scene(optionsScreen, 600, 800);
+        Scene optionsScene = new Scene(optionsScreen, width, height);
 
         mainStage.setScene(optionsScene);
     }
@@ -71,7 +74,7 @@ public class Menu extends Application{
         mainMenu.getOptionsButton().setOnAction(event -> showOptions());
         mainMenu.getExitButton().setOnAction(event -> System.exit(0));
 
-        Scene mainMenuScene = new Scene(mainMenu, 600, 800);
+        Scene mainMenuScene = new Scene(mainMenu, width, height);
 
         mainStage.setScene(mainMenuScene);
         mainStage.show();

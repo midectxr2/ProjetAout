@@ -79,13 +79,8 @@ public class Options extends VBox {
         for(int i=1; i<7;i++){
             HBox newHbox = new HBox();
             newHbox.setSpacing(10);
-            Text text = new Text(Integer.toString(i));
-            Display display = new Display();
-            HBox hBox = display.display();
-            newHbox.getChildren().addAll(text, hBox);
-            vBox1.getChildren().addAll(newHbox);
-            res = display.getNumber();
-            listBoats.add(res);
+            Display display = new Display(i);
+            vBox1.getChildren().addAll(display);
         }
 
 
