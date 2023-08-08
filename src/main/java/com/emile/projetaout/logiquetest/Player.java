@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private Grille grille;
-    private List<Bateau> bateaux;
+    private Grid grid;
+    private List<Boat> boats;
 
 
-    public Player(Grille grille, List<Integer> taillesBateaux){
-        this.grille = grille;
-        this.bateaux = new ArrayList<>();
-        for (int taille : taillesBateaux) {
-            this.bateaux.add(new Bateau(taille));
+    public Player(Grid grid, List<Integer> boatsLength){
+        this.grid = grid;
+        this.boats = new ArrayList<>();
+        for (int size : boatsLength) {
+            this.boats.add(new Boat(size));
         }
 
     }
 
-    public List<Bateau> getBateaux() {
-        return bateaux;
+    public List<Boat> getBoats() {
+        return boats;
     }
 
-    public Grille getGrille() {
-        return grille;
+    public Grid getGrid() {
+        return grid;
     }
 
-    public boolean estTermine() {
-        for (Bateau bateau : this.bateaux) {
-            if (!bateau.estCoule()) {
+    public boolean isFinished() {
+        for (Boat boat : this.boats) {
+            if (!boat.isAlive()) {
                 return false;
             }
         }

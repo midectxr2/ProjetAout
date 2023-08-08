@@ -1,40 +1,30 @@
 package com.emile.projetaout.javafx;
 
-import com.emile.projetaout.logiquetest.Bateau;
-import com.emile.projetaout.logiquetest.Cellule;
-import com.emile.projetaout.logiquetest.Grille;
+import com.emile.projetaout.logiquetest.Cell;
 import com.emile.projetaout.logiquetest.Player;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
-import java.util.List;
-
-public class CelluleJavafx extends Rectangle {
-    private Cellule cellule;
+public class CellJavafx extends Rectangle {
+    private Cell cell;
     private Player player;
 
-    public CelluleJavafx(Cellule cellule){
+    public CellJavafx(Cell cell){
         setWidth(30);
         setHeight(30);
         this.setFill(Color.LIGHTGRAY);
         this.setStroke(Color.BLACK);
-        this.cellule = cellule;
+        this.cell = cell;
     }
 
-    public boolean tirerSur(){
-        boolean res = cellule.tirerSur();
+    public boolean fireAt(){
+        boolean res = cell.fireAt();
         updateView();
         return res;
     }
 
     public void updateView(){
-        if(cellule.getBateau() == null){
+        if(cell.getBoat() == null){
             this.setFill(Color.BLUE);
         }else{
             this.setFill(Color.BLACK);
@@ -46,7 +36,7 @@ public class CelluleJavafx extends Rectangle {
     }
 
     public void disallowCheat(){
-        if(cellule.estTouchee()){
+        if(cell.isHit()){
             updateView();
         }else{
             this.setFill(Color.LIGHTGRAY);

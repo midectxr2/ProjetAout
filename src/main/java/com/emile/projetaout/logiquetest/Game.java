@@ -2,23 +2,20 @@ package com.emile.projetaout.logiquetest;
 
 import java.util.*;
 
-public class Jeu {
+public class Game {
     private Player p1;
     private Player p2;
     private boolean myTurn = true;
     Random random = new Random();
 
 
-    public Jeu(int lignes, int colonnes, List<Integer> taillesBateaux) {
-        p1 = new Player(new Grille(lignes, colonnes),  taillesBateaux);
-        p2 = new Player(new Grille(lignes, colonnes),  taillesBateaux);
+    public Game(int rows, int columns, List<Integer> boatsLength) {
+        p1 = new Player(new Grid(rows, columns), boatsLength);
+        p2 = new Player(new Grid(rows, columns), boatsLength);
 
-       this.initialiserJeu();
+       this.initGame();
    }
 
-    public Jeu(int taille, List<Integer> taillesBateaux){
-       this(taille, taille, taillesBateaux);
-    }
 
     public Player getP1() {
         return this.p1;
@@ -28,39 +25,39 @@ public class Jeu {
         return this.p2;
     }
 
-    private void initialiserJeu() {
+    private void initGame() {
 
-        for (Bateau bateau : p1.getBateaux()) {
+        for (Boat boat : p1.getBoats()) {
             while (true) {
                 // Choisissez une position de départ aléatoire.
-                int x = random.nextInt(p1.getGrille().getLignes());
-                int y = random.nextInt(p1.getGrille().getColonnes());
+                int x = random.nextInt(p1.getGrid().getRows());
+                int y = random.nextInt(p1.getGrid().getColumns());
 
                 // Choisissez une direction aléatoire.
                 Direction direction = random.nextBoolean() ? Direction.HORIZONTAL : Direction.VERTICAL;
 
                 try {
-                    p1.getGrille().placerBateau(bateau, x, y, direction);
+                    p1.getGrid().placeBoat(boat, x, y, direction);
                     break;
                 } catch (IllegalArgumentException e) {
-                    // Si le bateau ne peut pas être placé à la position/direction choisie, continuez à essayer avec une nouvelle position/direction.
+                    // Si le boat ne peut pas être placé à la position/direction choisie, continuez à essayer avec une nouvelle position/direction.
                 }
             }
         }
-        for (Bateau bateau : p2.getBateaux()) {
+        for (Boat boat : p2.getBoats()) {
             while (true) {
                 // Choisissez une position de départ aléatoire.
-                int x = random.nextInt(p2.getGrille().getLignes());
-                int y = random.nextInt(p2.getGrille().getColonnes());
+                int x = random.nextInt(p2.getGrid().getRows());
+                int y = random.nextInt(p2.getGrid().getColumns());
 
                 // Choisissez une direction aléatoire.
                 Direction direction = random.nextBoolean() ? Direction.HORIZONTAL : Direction.VERTICAL;
 
                 try {
-                    p2.getGrille().placerBateau(bateau, x, y, direction);
+                    p2.getGrid().placeBoat(boat, x, y, direction);
                     break;
                 } catch (IllegalArgumentException e) {
-                    // Si le bateau ne peut pas être placé à la position/direction choisie, continuez à essayer avec une nouvelle position/direction.
+                    // Si le boat ne peut pas être placé à la position/direction choisie, continuez à essayer avec une nouvelle position/direction.
                 }
             }
         }
@@ -68,7 +65,7 @@ public class Jeu {
 
     }
 
-    public void jouerTourp1() {
+    public void playP1Turn() {
         //Demande a l'utilisateur les coordonnées
         System.out.println("Entrez la ligne");
         Scanner sc = new Scanner(System.in);
@@ -78,7 +75,7 @@ public class Jeu {
         clearConsole();
         System.out.println("Vous avez tiré en x: "+x+", y: "+y);
 
-        while (!this.p2.getGrille().tirer(x, y)){
+        while (!this.p2.getGrid().fire(x, y)){
             System.out.println("Entrez une valeur correcte");
             System.out.println("Entrez la ligne");
             x = sc.nextInt();
@@ -88,22 +85,24 @@ public class Jeu {
             System.out.println("Vous avez tiré en x: "+x+", y: "+y);
         }
 
-        this.p2.getGrille().afficherGrille();
+        this.p2.getGrid().showGrid();
         myTurn = !myTurn;
+
+
     }
 
-    public void jouerTourp2() {
-        int x = random.nextInt(p1.getGrille().getLignes());
-        int y = random.nextInt(p1.getGrille().getColonnes());
+    public void playP2Turn() {
+        int x = random.nextInt(p1.getGrid().getRows());
+        int y = random.nextInt(p1.getGrid().getColumns());
 
 
-        while (!this.p1.getGrille().tirer(x, y)){
-             x = random.nextInt(p1.getGrille().getLignes());
-             y = random.nextInt(p1.getGrille().getColonnes());
+        while (!this.p1.getGrid().fire(x, y)){
+             x = random.nextInt(p1.getGrid().getRows());
+             y = random.nextInt(p1.getGrid().getColumns());
         }
 
         System.out.println("l'ordi a tiré en x: "+x+", y: "+y);
-        this.p1.getGrille().afficherGrille();
+        this.p1.getGrid().showGrid();
         myTurn = !myTurn;
 
     }
@@ -127,24 +126,26 @@ public class Jeu {
     }
 
    public boolean isFinished(){
-       return p1.estTermine() || p2.estTermine();
+       return p1.isFinished() || p2.isFinished();
    }
 
    public static void main(String[] args){
-       int lig = 10;
+       int rows = 10;
+
        int col = 10;
-       Jeu jeu = new Jeu(lig , col , Arrays.asList(2));
+
+       Game game = new Game(rows , col , Arrays.asList(5, 4, 3, 3, 2));
        System.out.println("DEBUT DU JEU");
-       jeu.getP2().getGrille().cheatMode();
-       while(!jeu.isFinished()){
-            if (jeu.myTurn){
-                jeu.jouerTourp1();
+       game.getP2().getGrid().cheatMode();
+       while(!game.isFinished()){
+            if (game.myTurn){
+                game.playP1Turn();
             }else{
-                jeu.jouerTourp2();
+                game.playP2Turn();
             }
        }
-       boolean p1Win = !jeu.p1.estTermine();
-       System.out.println("Fin du jeu");
+       boolean p1Win = !game.p1.isFinished();
+       System.out.println("Fin du game");
        if (p1Win){
            System.out.println("Le joueur a win");
        } else{

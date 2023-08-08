@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.Arrays;
+
 public class Options extends VBox {
 
     private Button returnButton;
@@ -22,10 +24,12 @@ public class Options extends VBox {
 
         returnButton = new Button("Return to Main Menu");
         startButton = new Button("Start");
-        ChoiceBox colonnes = new ChoiceBox(FXCollections.observableArrayList("5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"));
-        ChoiceBox lignes = new ChoiceBox(FXCollections.observableArrayList("5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"));
+
+
+         col = new ChoiceBox(FXCollections.observableArrayList("5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"));
+         row = new ChoiceBox(FXCollections.observableArrayList("5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"));
         final int[] value = new int[]{5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-        colonnes.getSelectionModel().selectedIndexProperty().addListener(
+        col.getSelectionModel().selectedIndexProperty().addListener(
                 (ObservableValue<? extends Number> ov,
                     Number old_val, Number new_val) -> {
                         res_colonnes = value[new_val.intValue()];
@@ -37,6 +41,7 @@ public class Options extends VBox {
                     res_lignes = value[new_val.intValue()];
                 }
         );
+        row.setValue(DEFAULT_VALUE);
 
 
         this.getChildren().addAll(returnButton, colonnes, lignes, startButton);
@@ -49,12 +54,22 @@ public class Options extends VBox {
         return returnButton;
     }
 
-    public int getColonnes(){
+    public ChoiceBox getCol() {
+        return col;
+    }
+
+    public ChoiceBox getRow() {
+        return row;
+    }
+
+    public int getRes_colonnes() {
         return res_colonnes;
     }
 
-    public int getRes_lignes(){
+    public int getRes_lignes() {
         return res_lignes;
     }
+
+
 
 }

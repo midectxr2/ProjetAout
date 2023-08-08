@@ -33,7 +33,7 @@ public class Menu extends Application{
 
         // définir les actions nécessaires pour les boutons de l'écran du jeu ici
 
-        Scene gameScene = new Scene(gameScreen.createContent(10, 10, Arrays.asList(3)), 600, 800);
+        Scene gameScene = new Scene(gameScreen.createContent(10, 10, Arrays.asList(5, 4, 3, 3, 2)), 600, 800);
 
         mainStage.setScene(gameScene);
     }
