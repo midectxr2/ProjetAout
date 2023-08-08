@@ -16,8 +16,11 @@ public class Options extends VBox {
 
     private Button returnButton;
     private Button startButton;
-    private int res_colonnes = 10;
-    private int res_lignes = 10;
+    private ChoiceBox col;
+    private ChoiceBox row;
+    private final int DEFAULT_VALUE = 10;
+    private int res_colonnes = DEFAULT_VALUE;
+    private int res_lignes = DEFAULT_VALUE;
 
 
     public Options() {
@@ -33,25 +36,32 @@ public class Options extends VBox {
                 (ObservableValue<? extends Number> ov,
                     Number old_val, Number new_val) -> {
                         res_colonnes = value[new_val.intValue()];
+                        System.out.println("Je set la col a " + res_colonnes);
                 }
         );
-        lignes.getSelectionModel().selectedIndexProperty().addListener(
+
+        col.setValue(DEFAULT_VALUE);
+
+        row.getSelectionModel().selectedIndexProperty().addListener(
                 (ObservableValue<? extends Number> ov,
                  Number old_val, Number new_val) -> {
                     res_lignes = value[new_val.intValue()];
+                    System.out.println("Je set la ligne a " + res_lignes);
+
                 }
         );
         row.setValue(DEFAULT_VALUE);
 
 
-        this.getChildren().addAll(returnButton, colonnes, lignes, startButton);
+        this.getChildren().addAll(returnButton, col, row, startButton);
     }
 
     public Button getReturnButton() {
         return returnButton;
     }
     public Button getStartButton() {
-        return returnButton;
+        System.out.println("Je Recupere le bouton start");
+        return startButton;
     }
 
     public ChoiceBox getCol() {

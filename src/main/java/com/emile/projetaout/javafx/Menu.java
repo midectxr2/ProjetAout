@@ -38,10 +38,30 @@ public class Menu extends Application{
         mainStage.setScene(gameScene);
     }
 
+    private void startGame(int row, int col) {
+        Battleshiptest gameScreen = new Battleshiptest();
+
+        // définir les actions nécessaires pour les boutons de l'écran du jeu ici
+
+        Scene gameScene = new Scene(gameScreen.createContent(row, col, Arrays.asList(2, 3)), 600, 800);
+
+        mainStage.setScene(gameScene);
+    }
+
     private void showOptions() {
         Options optionsScreen = new Options();
 
         optionsScreen.getReturnButton().setOnAction(event -> showMainMenu());
+
+
+        optionsScreen.getStartButton().setOnMouseClicked(event -> {
+            int col = optionsScreen.getRes_colonnes();
+            int row = optionsScreen.getRes_lignes();
+            System.out.println("Je lance une partie");
+            System.out.println("Col:" + col);
+            System.out.println("Row: " + row);
+            startGame(row, col);
+        });
 
         // définir les actions nécessaires pour les boutons de l'écran d'options ici
 
