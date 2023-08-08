@@ -1,20 +1,12 @@
 package com.emile.projetaout.javafx;
 
 import javafx.application.Application;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 public class Menu extends Application{
 
@@ -23,8 +15,10 @@ public class Menu extends Application{
 
 
 
+
     public void start(Stage stage) throws IOException {
         mainStage = stage;
+        mainStage.setResizable(false);
         showMainMenu();
 
     }
@@ -38,12 +32,12 @@ public class Menu extends Application{
         mainStage.setScene(gameScene);
     }
 
-    private void startGame(int row, int col) {
+    private void startGame(int row, int col, List<Integer> boatList) {
+        System.out.println(boatList);
         Battleshiptest gameScreen = new Battleshiptest();
 
         // définir les actions nécessaires pour les boutons de l'écran du jeu ici
-
-        Scene gameScene = new Scene(gameScreen.createContent(row, col, Arrays.asList(2, 3)), 600, 800);
+        Scene gameScene = new Scene(gameScreen.createContent(row, col, boatList), 600, 800);
 
         mainStage.setScene(gameScene);
     }
@@ -55,12 +49,12 @@ public class Menu extends Application{
 
 
         optionsScreen.getStartButton().setOnMouseClicked(event -> {
-            int col = optionsScreen.getRes_colonnes();
-            int row = optionsScreen.getRes_lignes();
-            System.out.println("Je lance une partie");
-            System.out.println("Col:" + col);
-            System.out.println("Row: " + row);
-            startGame(row, col);
+            int col = optionsScreen.getRes_col();
+            int row = optionsScreen.getRes_row();
+            List<Integer> integerList = optionsScreen.listBoats;
+
+
+            startGame(row, col, integerList);
         });
 
         // définir les actions nécessaires pour les boutons de l'écran d'options ici

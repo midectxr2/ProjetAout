@@ -10,16 +10,7 @@ public class Grid {
     private int columns;
     private Cell[][] cells;
 
-    public Grid(int length) {
-        this.rows = length;
-        this.columns = length;
-        this.cells = new Cell[rows][columns];
-        for (int i = 0; i < length; i++) {
-            for (int j = 0; j < length; j++) {
-                this.cells[i][j] = new Cell(i, j);
-            }
-        }
-    }
+
 
     public Grid(int columns, int rows){
         this.rows = rows;
