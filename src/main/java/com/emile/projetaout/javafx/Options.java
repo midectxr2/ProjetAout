@@ -2,6 +2,7 @@ package com.emile.projetaout.javafx;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.BorderPane;
@@ -62,18 +63,19 @@ public class Options extends VBox {
         row.setValue(DEFAULT_VALUE);
         hBox_grid.getChildren().addAll(gridLength, row_length, row, col_length, col);
 
-        int res;
+
 
         for(int i=1; i<7;i++){
-            HBox newHbox = new HBox();
-            newHbox.setSpacing(10);
             Display display = new Display(i);
+            //Text text = new Text("Nombre de bateaux de taille " + i + ": ");
             vBox1.getChildren().addAll(display);
+            vBox1.setAlignment(Pos.CENTER);
         }
 
-        Text boatLength = new Text("Taille Bateaux: ");
 
-        vBox.getChildren().addAll(returnButton, hBox_grid, boatLength, vBox1, startButton);
+
+        vBox.setAlignment(Pos.CENTER);
+        vBox.getChildren().addAll(returnButton, hBox_grid, vBox1, startButton);
 
         this.getChildren().addAll(vBox);
     }
@@ -98,7 +100,7 @@ public class Options extends VBox {
     public ArrayList<Integer> getBoat(){
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < vBox1.getChildren().size(); i++ ){
-            for (int j = 0; j < ((Display) vBox1.getChildren().get(i)).getNumber(); j++ ){
+            for (int j = 0; j < ((Display) vBox1.getChildren().get(i)).getNbr(); j++ ){
                 list.add( i+1 );
             }
         }

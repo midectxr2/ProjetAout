@@ -1,39 +1,45 @@
 package com.emile.projetaout.javafx;
 
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import javax.net.ssl.HostnameVerifier;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Display extends HBox {
+public class Display extends VBox {
 
-    private int number = 0;
+    private ChoiceBox boats;
+    private final int defaultValue  = 0;
+    private int nbr = defaultValue;
 
 
     public Display(int nb){
-        HBox hBox = new HBox();
-        hBox.setSpacing(10);
-        hBox.setSpacing(10);
-        Button buttonLess = new Button("-");
-        Button buttonMore = new Button("+");
-        Text text = new Text(Integer.toString(0));
+        boats = new ChoiceBox(FXCollections.observableArrayList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+        final int[] value = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        boats.getSelectionModel().selectedIndexProperty().addListener(
+                (ObservableValue<? extends Number> ov,
+                 Number old_val, Number new_val) -> {
+                    nbr = value[new_val.intValue()];
+                }
+        );
+        boats.setValue(nbr);
 
-        buttonMore.setOnMouseClicked(event -> {
-            text.setText(Integer.toString(number));
-            ++number;
-        });
 
-        buttonLess.setOnMouseClicked(event -> {
-            text.setText(Integer.toString(number));
-            --number;
-        });
+        VBox vBox = new VBox();
+        vBox.setSpacing(10);
+        this.setAlignment(Pos.CENTER);
+        this.getChildren().addAll(new Text("Nombre de bateaux de taille :"+nb), boats);
 
-        this.getChildren().addAll(new Text("" + nb), buttonLess, text, buttonMore);
     }
 
-    public int getNumber() {
-        return number-1;
+    public int getNbr(){
+        return nbr;
     }
 }

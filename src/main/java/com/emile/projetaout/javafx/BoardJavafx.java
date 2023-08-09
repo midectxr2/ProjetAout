@@ -1,12 +1,17 @@
 package com.emile.projetaout.javafx;
 
+import com.emile.projetaout.logiquetest.Cell;
 import com.emile.projetaout.logiquetest.Grid;
+import com.emile.projetaout.logiquetest.Position;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import static java.lang.Math.abs;
 
 public class BoardJavafx extends Parent {
     private Battleshiptest game;
@@ -29,6 +34,7 @@ public class BoardJavafx extends Parent {
                 if(!isPlayer) {
                     cellJavafx1.setOnMouseClicked(e -> {
                         if (cellJavafx1.fireAt()) {
+                            System.out.println(distanceMan(cellJavafx1));
                             if (game.getGame().getP1().isFinished()) {
                                 System.out.println("Partie terminée, le joueur a gagné");
                                 showAlert("Le joueur a gagné");
@@ -88,4 +94,44 @@ public class BoardJavafx extends Parent {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
+    public int distanceMan(CellJavafx cellJavafx){
+        Cell cell = cellJavafx.getCell();
+        Position pos = cell.getPosition();
+        int posX = pos.getX();
+        int posY = pos.getY();
+
+
+        ArrayList<Cell> cellArrayList = new ArrayList<>();
+        Grid grid1 = game.getGame().getP1().getGrid();
+        for(int i=0; i<grid1.getRows(); i++){
+            for(int j=0; j<grid1.getColumns();j++){
+                Cell cell1 = grid1.getCell(i, j);
+                if(cell1.getBoat() != null){
+                    cellArrayList.add(cell1);
+                }
+            }
+        }
+
+        ArrayList<Integer> integerArrayList = new ArrayList<>();
+        for(Cell c: cellArrayList){
+            Position position = c.getPosition();
+            int posX_cell = position.getX();
+            int posY_cell = position.getY();
+            int res = abs(posX_cell - posX) + abs(posY_cell - posY);
+            integerArrayList.add(res);
+        }
+
+        int res = integerArrayList.get(0);
+        for(Integer integer: integerArrayList){
+            if(integer < res){
+                res = integer;
+            }
+
+
+        }
+        return res;
+    }
+
 }

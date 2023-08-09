@@ -10,4 +10,12 @@ public class Position {
     }
 
     // Getters pour x et y
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }

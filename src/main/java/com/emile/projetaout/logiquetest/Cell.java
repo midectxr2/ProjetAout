@@ -7,8 +7,6 @@ public class Cell {
 
     private Position position;
 
-    private int x;
-    private int y;
 
     public Cell(int x, int y) {
         this.position = new Position(x, y);
@@ -45,6 +43,10 @@ public class Cell {
             return true;
         }
         return false;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }
 

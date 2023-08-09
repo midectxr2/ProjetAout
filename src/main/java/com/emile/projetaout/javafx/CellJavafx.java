@@ -42,4 +42,8 @@ public class CellJavafx extends Rectangle {
             this.setFill(Color.LIGHTGRAY);
         }
     }
+
+    public Cell getCell() {
+        return cell;
+    }
 }
