@@ -55,6 +55,12 @@ public class Game {
         turn++;
     }
 
+    public boolean play(Cell cell){
+        boolean res = playersList.get((turn+1) %2).play(cell);
+        if (res) turn++;
+        return res;
+    }
+
     public static void clearConsole() {
         try {
             final String os = System.getProperty("os.name");

@@ -13,9 +13,7 @@ public class Grid {
     private Cell[][] cells;
 
     private ArrayList<Boat> boatArrayList;
-
-
-
+    
     public Grid(int columns, int rows){
         this.rows = rows;
         this.columns = columns;
