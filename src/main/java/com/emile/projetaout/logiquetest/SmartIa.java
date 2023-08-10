@@ -1,0 +1,29 @@
+package com.emile.projetaout.logiquetest;
+
+import java.util.List;
+import java.util.Random;
+
+public class SmartIa extends Player{
+
+
+    Random random = new Random();
+
+    public SmartIa(Grid grid, List<Integer> boatsLength) {
+        super(grid, boatsLength);
+    }
+
+    @Override
+    public void play(Grid grid){
+        int x = random.nextInt(grid.getRows());
+        int y = random.nextInt(grid.getColumns());
+
+
+        while (!grid.fire(x, y)){
+            x = random.nextInt(grid.getRows());
+            y = random.nextInt(grid.getColumns());
+        }
+
+        System.out.println("l'ia intelligente a tirée en x: "+x+", y: "+y);
+        grid.showGrid();
+    }
+}

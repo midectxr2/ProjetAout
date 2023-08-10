@@ -23,8 +23,8 @@ public class Battleshiptest extends Parent {
 
         game = new Game(rows, columns, list);
 
-        enemyGrid = new BoardJavafx(this, game.getP1().getGrid(), false);
-        playerGrid = new BoardJavafx(this, game.getP2().getGrid(), true);
+        enemyGrid = new BoardJavafx(this, game.getPlayersList().get(1).getGrid(), false);
+        playerGrid = new BoardJavafx(this, game.getPlayersList().get(0).getGrid(), true);
 
         VBox vbox = new VBox(50, enemyGrid, playerGrid);
         vbox.setAlignment(Pos.CENTER);

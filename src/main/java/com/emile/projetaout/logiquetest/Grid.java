@@ -5,6 +5,8 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 public class Grid {
     private int rows;
     private int columns;
@@ -53,11 +55,13 @@ public class Grid {
         // Vérifiez si le boat chevauche un autre boat.
         for (int i = 0; i < boat.getLength(); i++) {
             if (direction == Direction.HORIZONTAL) {
-                if (cells[x + i][y].getBoat() != null) {
+                //if (cells[x + i][y].getBoat() != null) {
+                if (cells[y][x+i].getBoat() != null) {
                     throw new IllegalArgumentException("Boat chevauche un autre boat.");
                 }
             } else { // Direction.VERTICAL
-                if (cells[x][y + i].getBoat() != null) {
+                //if (cells[x][y + i].getBoat() != null) {
+                if (cells[y+i][x].getBoat() != null) {
                     throw new IllegalArgumentException("Boat chevauche un autre boat.");
                 }
             }
@@ -103,6 +107,7 @@ public class Grid {
 
     public Cell[] getNeihbour(int x, int y){
         Point2D[] points = new Point2D[]{
+                /*
                 new Point2D(x-1, y),
                 new Point2D(x-1, y-1),
                 new Point2D(x, y-1),
@@ -110,13 +115,24 @@ public class Grid {
                 new Point2D(x+1, y),
                 new Point2D(x, y+1),
                 new Point2D(x+1, y+1),
-                new Point2D(x+1, y-1),
+                new Point2D(x+1, y-1),*/
+                new Point2D(y, x-1),
+                new Point2D(y-1, x-1),
+                new Point2D(y-1, x),
+                new Point2D(y+1,x-1 ),
+                new Point2D(y, x+1),
+                new Point2D(y+1, x),
+                new Point2D(y+1, x+1),
+                new Point2D(y-1, x+1),
         };
         List<Cell> neighbors = new ArrayList<Cell>();
         for(Point2D p: points){
-            if(isValidPoint(p))
-                neighbors.add(cells[(int)p.getX()][(int)p.getY()]);
+            if(isValidPoint(p)) {
+                System.out.println("X:" + p.getX() + "Y:" + p.getY());
+                System.out.println("X int " + (int) p.getX() + "Y int: " + (int) p.getY());
+                neighbors.add(cells[(int) p.getY()][(int) p.getX()]);
             }
+        }
         return neighbors.toArray(new Cell[0]);
 
     }
@@ -133,7 +149,6 @@ public class Grid {
 
 
     public boolean fire(int x, int y) {
-        System.out.println("Je tire en : " + x + " - "+ y);
 
         // Vérifiez si la position est dans la grille.
         if (x < 0 || y < 0 || x >= rows || y >= columns) {
@@ -144,6 +159,7 @@ public class Grid {
 
         // Marquez la cell comme étant touchée.
         // Return false et ne tire pas sur la cell si la cell a deja ete toucher
+
         return cell.fireAt();
 
         // Si la cell contient un bateau, informez le bateau qu'il a été touché.
@@ -177,18 +193,78 @@ public class Grid {
     public void cheatMode() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                    //System.out.println(cells[i][j].toString());
+                //System.out.println(cells[i][j].toString());
 
-                    if (cells[i][j].getBoat() != null) {
-                        System.out.print("O "); // Tir réussi
-                    } else {
-                        System.out.print("X "); // Tir manqué
-                    }
+                if (cells[i][j].getBoat() != null) {
+                    System.out.print("O "); // Tir réussi
+                } else {
+                    System.out.print("X "); // Tir manqué
                 }
+            }
             System.out.println();
         }
         System.out.println();
     }
+
+
+    private int length;
+
+    public int distanceMan(Cell cell){
+        ArrayList<Cell> cellArrayList = new ArrayList<>();
+        Position pos = cell.getPosition();
+        int posX = pos.getX();
+        int posY = pos.getY();
+
+
+
+        for(int i=0; i<getRows(); i++){
+            for(int j=0; j<getColumns();j++){
+                Cell cell1 = getCell(i, j);
+                if(cell1.getBoat() != null){
+                    cellArrayList.add(cell1);
+                }
+            }
+        }
+
+
+        Cell cell1 = cellArrayList.get(0);
+        int tmp = getColumns() + getRows()+1;
+        for(Cell c: cellArrayList){
+            Position position = c.getPosition();
+
+            int posX_cell = position.getX();
+            int posY_cell = position.getY();
+            int res = abs(posX_cell - posX) + abs(posY_cell - posY);
+
+
+
+            if(res < tmp){
+                tmp = res;
+                cell1 = c;
+            }
+            if(res == tmp){
+                if(cell1.getBoat().getLength() >= c.getBoat().getLength()){
+                    cell1 = c;
+                }
+            }
+
+        }
+
+        length = cell1.getBoat().getLength();
+        return tmp;
+    }
+
+    public int lengthNearestBoat(){
+        return getLength();
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+
+
+
 
 
 }

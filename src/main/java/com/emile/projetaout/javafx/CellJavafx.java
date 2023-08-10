@@ -10,8 +10,8 @@ public class CellJavafx extends Rectangle {
     private Player player;
 
     public CellJavafx(Cell cell){
-        setWidth(30);
-        setHeight(30);
+        setWidth(25);
+        setHeight(25);
         this.setFill(Color.LIGHTGRAY);
         this.setStroke(Color.BLACK);
         this.cell = cell;
