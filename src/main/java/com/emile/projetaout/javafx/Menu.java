@@ -13,8 +13,8 @@ public class Menu extends Application{
 
     private Stage mainStage;
 
-    private int width = 1400;
-    private int height = 1000;
+    private int width = 1000;
+    private int height = 800;
 
 
 

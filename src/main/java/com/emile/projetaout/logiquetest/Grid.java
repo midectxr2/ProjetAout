@@ -10,6 +10,8 @@ public class Grid {
     private int columns;
     private Cell[][] cells;
 
+    private ArrayList<Boat> boatArrayList;
+
 
 
     public Grid(int columns, int rows){
@@ -90,8 +92,11 @@ public class Grid {
         for (int i = 0; i < boat.getLength(); i++) {
             if (direction == Direction.HORIZONTAL) {
                 cells[x + i][y].setBoat(boat);
+                boat.addCell(cells[x + i][y]);
+
             } else { // Direction.VERTICAL
                 cells[x][y + i].setBoat(boat);
+                boat.addCell(cells[x][y+i]);
             }
         }
     }
@@ -121,6 +126,8 @@ public class Grid {
     }
 
     private boolean isValidPoint(double x, double y){
+        x = (int) x;
+        y = (int) y;
         return x>=0 && x< getColumns() && y>=0 && y< getRows();
     }
 
