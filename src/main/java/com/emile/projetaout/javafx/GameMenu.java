@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class GameMenu extends Parent {
+    Button IaPlay = new Button("PLAY IA MODE");
     Button options = new Button("OPTIONS");
     Button play = new Button("PLAY");
     Button exit = new Button("EXIT");
@@ -15,7 +16,7 @@ public class GameMenu extends Parent {
         VBox menu = new VBox(10);
 
 
-        menu.getChildren().addAll(play, options, exit);
+        menu.getChildren().addAll(play,IaPlay, options, exit);
         getChildren().addAll(menu);
 
     }
@@ -31,4 +32,6 @@ public class GameMenu extends Parent {
     public Button getExitButton() {
         return exit;
     }
+
+    public Button getIaPlayButton(){return IaPlay;}
 }

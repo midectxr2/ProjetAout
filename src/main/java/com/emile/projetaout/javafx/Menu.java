@@ -45,6 +45,18 @@ public class Menu extends Application{
         mainStage.setScene(gameScene);
     }
 
+    public void startGameIa(){
+        Battleshiptest gameScreen = new Battleshiptest();
+        Scene scene = new Scene(gameScreen.createContentSmartIaVsIa(10, 10, Arrays.asList(5, 4, 3, 3, 2)), width, height);
+        mainStage.setScene(scene);
+    }
+
+    public void startGameIa(int row, int col, List<Integer> boatList){
+        Battleshiptest gameScreen = new Battleshiptest();
+        Scene scene = new Scene(gameScreen.createContentSmartIaVsIa(row, col, boatList), width, height);
+        mainStage.setScene(scene);
+    }
+
     private void showOptions() {
         Options optionsScreen = new Options();
 
@@ -59,6 +71,14 @@ public class Menu extends Application{
             startGame(row, col, integerList);
         });
 
+        optionsScreen.getStartIaButton().setOnMouseClicked(event -> {
+            int col = optionsScreen.getRes_col();
+            int row = optionsScreen.getRes_row();
+            List<Integer> integerList = optionsScreen.getBoat();
+
+            startGameIa(row, col, integerList);
+        });
+
         // définir les actions nécessaires pour les boutons de l'écran d'options ici
 
         Scene optionsScene = new Scene(optionsScreen, width, height);
@@ -68,7 +88,7 @@ public class Menu extends Application{
 
     private void showMainMenu() {
         GameMenu mainMenu = new GameMenu();
-
+        mainMenu.getIaPlayButton().setOnAction(event -> startGameIa());
         mainMenu.getStartButton().setOnAction(event -> startGame());
         mainMenu.getOptionsButton().setOnAction(event -> showOptions());
         mainMenu.getExitButton().setOnAction(event -> System.exit(0));

@@ -18,6 +18,8 @@ public class Options extends VBox {
 
     private Button returnButton;
     private Button startButton;
+
+    private Button startIaButton;
     private ChoiceBox col;
     private ChoiceBox row;
     private final int DEFAULT_VALUE = 10;
@@ -32,6 +34,7 @@ public class Options extends VBox {
 
         returnButton = new Button("Return to Main Menu");
         startButton = new Button("Start");
+        startIaButton = new Button("IA START");
 
         HBox hBox_grid = new HBox();
         hBox_grid.setSpacing(10);
@@ -75,7 +78,7 @@ public class Options extends VBox {
 
 
         vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(returnButton, hBox_grid, vBox1, startButton);
+        vBox.getChildren().addAll(returnButton, hBox_grid, vBox1, startButton, startIaButton);
 
         this.getChildren().addAll(vBox);
     }
@@ -86,6 +89,8 @@ public class Options extends VBox {
     public Button getStartButton() {
         return startButton;
     }
+
+    public Button getStartIaButton(){return startIaButton;}
 
 
     public int getRes_col() {

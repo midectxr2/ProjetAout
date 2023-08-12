@@ -4,10 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 public class Ia extends Player{
-    int LastX;
-
-
-    int LastY;
 
     Random random = new Random();
 
@@ -17,8 +13,8 @@ public class Ia extends Player{
 
     @Override
     public void play(Grid grid){
-        LastX = random.nextInt(grid.getRows());
-        LastY = random.nextInt(grid.getColumns());
+        int LastX = random.nextInt(grid.getRows());
+        int LastY = random.nextInt(grid.getColumns());
 
 
         while (!grid.fire(LastX, LastY)){
@@ -30,11 +26,4 @@ public class Ia extends Player{
         grid.showGrid();
     }
 
-    public int getLastX() {
-        return LastX;
-    }
-
-    public int getLastY() {
-        return LastY;
-    }
 }

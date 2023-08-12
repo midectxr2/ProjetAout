@@ -11,12 +11,23 @@ public class Game {
 
 
 
-    public Game(int rows, int columns, List<Integer> boatsLength) {
-        Player p1 = new Player(new Grid(rows, columns), boatsLength);
-        Ia p2 = new Ia(new Grid(rows, columns), boatsLength);
-        playersList.add(p1);
-        playersList.add(p2);
+    public Game() {
 
+   }
+
+   public void setPlayerVsIa(int rows, int columns, List<Integer> boatsLength){
+       Player p1 = new Player(new Grid(rows, columns), boatsLength);
+       Ia p2 = new Ia(new Grid(rows, columns), boatsLength);
+       playersList.add(p1);
+       playersList.add(p2);
+       this.initGame();
+   }
+
+   public void setSmartIaVsIa(int rows, int columns, List<Integer> boatsLength){
+       SmartIa p1 = new SmartIa(new Grid(rows, columns), boatsLength);
+       Ia p2 = new Ia(new Grid(rows, columns), boatsLength);
+       playersList.add(p1);
+       playersList.add(p2);
        this.initGame();
    }
 
@@ -41,6 +52,7 @@ public class Game {
                         break;
                     } catch (IllegalArgumentException e) {
                         // Si le boat ne peut pas être placé à la position/direction choisie, continuez à essayer avec une nouvelle position/direction.
+
                     }
                 }
             }
@@ -84,9 +96,10 @@ public class Game {
    }
 
    public static void main(String[] args){
-       int rows = 10;
-       int col = 10;
-       Game game = new Game(rows , col , Arrays.asList(5, 4, 3, 3, 2));
+       int rows = 15;
+       int col = 7;
+       Game game = new Game();
+       game.setPlayerVsIa(rows , col , Arrays.asList(5, 4, 3, 3, 2));
        System.out.println("DEBUT DU JEU");
        game.playGame();
    }

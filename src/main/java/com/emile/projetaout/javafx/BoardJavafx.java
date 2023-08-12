@@ -32,18 +32,20 @@ public class BoardJavafx extends Parent {
                     cellJavafx1.setOnMouseClicked(e -> {
                         System.out.println("Je tire en :" + cellJavafx1.getCell().getPosition().toString());
                         if(game.getGame().play(cellJavafx1.getCell())){
-                            cellJavafx1.fireAt();
+                            //cellJavafx1.fireAt();
+
                             if(game.getGame().isFinished()){
                                 showAlert("Le joueur a gagné");
                             }else{
                                 System.out.println(grid.distanceMan(cellJavafx1.getCell()));
                                 System.out.println(grid.lengthNearestBoat());
                                 game.getGame().play();
-                                Ia ia = (Ia) game.getGame().getPlayersList().get(1);
+                                game.refreshAllView();
 
-                                HBox rows_grid = (HBox) game.getPlayerGrid().getRowss().getChildren().get(ia.getLastX());
-                                CellJavafx cell = (CellJavafx) rows_grid.getChildren().get(ia.getLastY());
-                                cell.fireAt();
+                                //Ia ia = (Ia) game.getGame().getPlayersList().get(1);
+                                //HBox rows_grid = (HBox) game.getPlayerGrid().getRowss().getChildren().get(ia.getLastX());
+                                //CellJavafx cell = (CellJavafx) rows_grid.getChildren().get(ia.getLastY());
+                                //cell.fireAt();
                                 if (game.getGame().isFinished())showAlert("Le bot a gagné");
                             }
                         }else{

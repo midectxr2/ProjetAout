@@ -14,16 +14,15 @@ public class SmartIa extends Player{
 
     @Override
     public void play(Grid grid){
-        int x = random.nextInt(grid.getRows());
-        int y = random.nextInt(grid.getColumns());
+        int LastX = random.nextInt(grid.getRows());
+        int LastY = random.nextInt(grid.getColumns());
 
 
-        while (!grid.fire(x, y)){
-            x = random.nextInt(grid.getRows());
-            y = random.nextInt(grid.getColumns());
+        while (!grid.fire(LastX, LastY)){
+            LastX = random.nextInt(grid.getRows());
+            LastY = random.nextInt(grid.getColumns());
         }
-
-        System.out.println("l'ia intelligente a tirée en x: "+x+", y: "+y);
+        System.out.println("l'ia intelligente a tirée en x: "+LastX+", y: "+LastY);
         grid.showGrid();
     }
 }
