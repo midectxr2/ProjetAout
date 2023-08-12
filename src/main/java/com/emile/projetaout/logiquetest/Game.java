@@ -41,14 +41,14 @@ public class Game {
             for (Boat boat : player.getBoats()) {
                 while (true) {
                     // Choisissez une position de départ aléatoire.
-                    int x = random.nextInt(player.getGrid().getRows());
-                    int y = random.nextInt(player.getGrid().getColumns());
+                    int row = random.nextInt(player.getGrid().getRows());
+                    int col = random.nextInt(player.getGrid().getColumns());
 
                     // Choisissez une direction aléatoire.
                     Direction direction = random.nextBoolean() ? Direction.HORIZONTAL : Direction.VERTICAL;
 
                     try {
-                        player.getGrid().placeBoat(boat, x, y, direction);
+                        player.getGrid().placeBoat(boat, row, col, direction);
                         break;
                     } catch (IllegalArgumentException e) {
                         // Si le boat ne peut pas être placé à la position/direction choisie, continuez à essayer avec une nouvelle position/direction.
@@ -97,9 +97,9 @@ public class Game {
 
    public static void main(String[] args){
        int rows = 15;
-       int col = 7;
+       int col = 5;
        Game game = new Game();
-       game.setPlayerVsIa(rows , col , Arrays.asList(5, 4, 3, 3, 2));
+       game.setPlayerVsIa(rows , col , Arrays.asList(5, 5, 5, 5, 5));
        System.out.println("DEBUT DU JEU");
        game.playGame();
    }

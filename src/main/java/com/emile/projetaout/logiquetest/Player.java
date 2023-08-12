@@ -59,8 +59,8 @@ public class Player {
     }
 
     public boolean play(Cell cell){
-        int x = cell.getPosition().getX();
-        int y = cell.getPosition().getY();
+        int x = cell.getPosition().getRow();
+        int y = cell.getPosition().getCol();
         System.out.println("Vous avez tiré en x: "+x+", y: "+y);
 
         return grid.fire(x, y);

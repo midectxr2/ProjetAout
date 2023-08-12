@@ -1,7 +1,5 @@
 package com.emile.projetaout.logiquetest;
 
-import javafx.geometry.Point2D;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,27 +37,30 @@ public class Grid {
         return cells[x][y];
     }
 
-    public void placeBoat(Boat boat, int x, int y, Direction direction) {
+    public void placeBoat(Boat boat, int row, int col, Direction direction) {
         // Vérifiez si la position de départ est dans la grille.
-        if (x < 0 || y < 0 || x >= rows || y >= columns) {
+        if (row < 0 || col < 0 || row >= rows || col >= columns) {
             throw new IllegalArgumentException("Position de départ hors de la grille.");
         }
 
         // Vérifiez si le boat peut être placé dans la direction donnée à partir de la position de départ.
-        if (direction == Direction.HORIZONTAL && x + boat.getLength() > columns || direction == Direction.VERTICAL && y + boat.getLength() > rows) {
+        if (direction == Direction.HORIZONTAL && col + boat.getLength() > columns || direction == Direction.VERTICAL && row + boat.getLength() > rows) {
             throw new IllegalArgumentException("Boat trop grand pour être placé à cette position dans cette direction.");
         }
+
 
         // Vérifiez si le boat chevauche un autre boat.
         for (int i = 0; i < boat.getLength(); i++) {
             if (direction == Direction.HORIZONTAL) {
                 //if (cells[x + i][y].getBoat() != null) {
-                if (cells[y][x+i].getBoat() != null) {
+                if (cells[row][col +i].getBoat() != null) {
+                    System.out.println("Boat chevauve un autre boat");
                     throw new IllegalArgumentException("Boat chevauche un autre boat.");
                 }
             } else { // Direction.VERTICAL
                 //if (cells[x][y + i].getBoat() != null) {
-                if (cells[y+i][x].getBoat() != null) {
+                if (cells[row +i][col].getBoat() != null) {
+                    System.out.println("Boat chevauve un autre boat");
                     throw new IllegalArgumentException("Boat chevauche un autre boat.");
                 }
             }
@@ -68,7 +69,7 @@ public class Grid {
 
         for (int i = 0; i < boat.getLength(); i++) {
             if (direction == Direction.HORIZONTAL) {
-                Cell[] neighbors = getNeihbour(x+i, y);
+                Cell[] neighbors = getNeihbour(row, col+i);
                 for(Cell cell : neighbors){
                     if(cell.getBoat() != null){
                         throw new IllegalArgumentException(("Boat trop proche"));
@@ -76,7 +77,7 @@ public class Grid {
                 }
             }
             else{
-                Cell[] neighbors = getNeihbour(x, y+i);
+                Cell[] neighbors = getNeihbour(row+i, col);
                 for(Cell cell : neighbors){
                     if(cell.getBoat() != null){
                         throw new IllegalArgumentException(("Boat trop proche"));
@@ -93,18 +94,18 @@ public class Grid {
         // Placez le boat sur la grille.
         for (int i = 0; i < boat.getLength(); i++) {
             if (direction == Direction.HORIZONTAL) {
-                cells[x + i][y].setBoat(boat);
-                boat.addCell(cells[x + i][y]);
+                cells[row][col+i].setBoat(boat);
+                boat.addCell(cells[row][col+i]);
 
             } else { // Direction.VERTICAL
-                cells[x][y + i].setBoat(boat);
-                boat.addCell(cells[x][y+i]);
+                cells[row+i][col].setBoat(boat);
+                boat.addCell(cells[row+i][col]);
             }
         }
     }
 
-    public Cell[] getNeihbour(int x, int y){
-        Point2D[] points = new Point2D[]{
+    public Cell[] getNeihbour(int row, int col){
+        Position[] points = new Position[]{
                 /*
                 new Point2D(x-1, y),
                 new Point2D(x-1, y-1),
@@ -114,35 +115,34 @@ public class Grid {
                 new Point2D(x, y+1),
                 new Point2D(x+1, y+1),
                 new Point2D(x+1, y-1),*/
-                new Point2D(y, x-1),
-                new Point2D(y-1, x-1),
-                new Point2D(y-1, x),
-                new Point2D(y+1,x-1 ),
-                new Point2D(y, x+1),
-                new Point2D(y+1, x),
-                new Point2D(y+1, x+1),
-                new Point2D(y-1, x+1),
+                new Position(col, row -1),
+                new Position(col -1, row -1),
+                new Position(col -1, row),
+                new Position(col +1, row -1 ),
+                new Position(col, row +1),
+                new Position(col +1, row),
+                new Position(col +1, row +1),
+                new Position(col -1, row +1),
         };
         List<Cell> neighbors = new ArrayList<Cell>();
-        for(Point2D p: points){
+        for(Position p: points){
             if(isValidPoint(p)) {
-                System.out.println("X:" + p.getX() + "Y:" + p.getY());
-                System.out.println("X int " + (int) p.getX() + "Y int: " + (int) p.getY());
-                neighbors.add(cells[(int) p.getY()][(int) p.getX()]);
+                System.out.println("row:" + p.getRow() + "col:" + p.getCol());
+                neighbors.add(cells[ p.getRow()][ p.getCol()]);
             }
         }
         return neighbors.toArray(new Cell[0]);
 
     }
 
-    private boolean isValidPoint(Point2D point2D){
-        return isValidPoint(point2D.getX(), point2D.getY());
+    private boolean isValidPoint(Position point2D){
+        return isValidPoint(point2D.getRow(), point2D.getCol());
     }
 
-    private boolean isValidPoint(double x, double y){
-        x = (int) x;
-        y = (int) y;
-        return x>=0 && x< getColumns() && y>=0 && y< getRows();
+    private boolean isValidPoint(double row, double col){
+        row = (int) row;
+        col = (int) col;
+        return row >=0 && row < getRows() && col >=0 && col < getColumns();
     }
 
 
@@ -210,8 +210,8 @@ public class Grid {
     public int distanceMan(Cell cell){
         ArrayList<Cell> cellArrayList = new ArrayList<>();
         Position pos = cell.getPosition();
-        int posX = pos.getX();
-        int posY = pos.getY();
+        int posX = pos.getRow();
+        int posY = pos.getCol();
 
 
 
@@ -230,8 +230,8 @@ public class Grid {
         for(Cell c: cellArrayList){
             Position position = c.getPosition();
 
-            int posX_cell = position.getX();
-            int posY_cell = position.getY();
+            int posX_cell = position.getRow();
+            int posY_cell = position.getCol();
             int res = abs(posX_cell - posX) + abs(posY_cell - posY);
 
 
