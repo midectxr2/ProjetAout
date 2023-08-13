@@ -11,6 +11,12 @@ public class Ia extends Player{
         super(grid, boatsLength);
     }
 
+    public Ia(Grid grid){
+        super(grid);
+    }
+
+
+
     @Override
     public void play(Grid grid){
         int LastX = random.nextInt(grid.getRows());

@@ -8,6 +8,7 @@ public class Cell {
     private Position position;
 
 
+
     public Cell(int x, int y) {
         this.position = new Position(x, y);
         this.etat = false;
@@ -39,10 +40,15 @@ public class Cell {
             this.etat = true;
             if (this.boat != null) {
                 this.boat.hit();
+                if(!boat.isAlive()){
+                    System.out.println("touché coulé");
+                }
             }
+
             return true;
         }
         return false;
+
     }
 
     public Position getPosition() {

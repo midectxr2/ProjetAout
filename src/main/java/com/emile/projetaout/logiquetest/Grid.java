@@ -116,19 +116,21 @@ public class Grid {
                 new Point2D(x, y+1),
                 new Point2D(x+1, y+1),
                 new Point2D(x+1, y-1),*/
-                new Position(col, row -1),
-                new Position(col -1, row -1),
-                new Position(col -1, row),
-                new Position(col +1, row -1 ),
-                new Position(col, row +1),
-                new Position(col +1, row),
-                new Position(col +1, row +1),
-                new Position(col -1, row +1),
+                new Position(row, col -1),
+                new Position(row -1, col -1),
+                new Position(row -1, col),
+                new Position(row +1, col -1 ),
+                new Position(row, col +1),
+                new Position(row +1, col),
+                new Position(row +1, col +1),
+                new Position(row -1, col +1),
         };
         List<Cell> neighbors = new ArrayList<Cell>();
+
+
         for(Position p: points){
             if(isValidPoint(p)) {
-                System.out.println("row:" + p.getRow() + "col:" + p.getCol());
+
                 neighbors.add(cells[ p.getRow()][ p.getCol()]);
             }
         }
@@ -140,9 +142,7 @@ public class Grid {
         return isValidPoint(point2D.getRow(), point2D.getCol());
     }
 
-    private boolean isValidPoint(double row, double col){
-        row = (int) row;
-        col = (int) col;
+    private boolean isValidPoint(int row, int col){
         return row >=0 && row < getRows() && col >=0 && col < getColumns();
     }
 

@@ -38,7 +38,7 @@ public class Boat {
         return "Boat{" +
                 "length=" + length +
                 ", health=" + health +
-                ", cells=" + cells +
+                //", cells=" + cells +
                 '}';
     }
 

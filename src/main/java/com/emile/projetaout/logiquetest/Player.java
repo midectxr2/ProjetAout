@@ -9,6 +9,7 @@ public class Player {
     private List<Boat> boats;
 
 
+
     public Player(Grid grid, List<Integer> boatsLength){
         this.grid = grid;
         this.boats = new ArrayList<>();
@@ -16,6 +17,15 @@ public class Player {
             this.boats.add(new Boat(size));
         }
 
+    }
+
+    public Player(Grid grid){
+        this.grid = grid;
+        this.boats = boats;
+    }
+
+    public void setBoats(ArrayList<Boat> boats){
+        this.boats = boats;
     }
 
     public List<Boat> getBoats() {
@@ -33,6 +43,7 @@ public class Player {
             }
         }
         return true;
+
     }
 
 
@@ -55,7 +66,6 @@ public class Player {
             System.out.println("Vous avez tiré en x: "+x+", y: "+y);
         }
         grid.showGrid();
-
     }
 
     public boolean play(Cell cell){
@@ -66,6 +76,10 @@ public class Player {
         return grid.fire(x, y);
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Player{" +
+                "boats=" + boats +
+                '}';
+    }
 }
