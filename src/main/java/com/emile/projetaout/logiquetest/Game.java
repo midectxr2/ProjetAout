@@ -51,6 +51,27 @@ public class Game {
         }
     }
 
+    private void placeBoatPlayer(Player player){
+        for (Boat boat : player.getBoats()) {
+            while (true) {
+                // Choisissez une position de départ aléatoire.
+                int row = random.nextInt(player.getGrid().getRows());
+                int col = random.nextInt(player.getGrid().getColumns());
+
+                // Choisissez une direction aléatoire.
+                Direction direction = random.nextBoolean() ? Direction.HORIZONTAL : Direction.VERTICAL;
+
+                try {
+                    player.getGrid().placeBoat(boat, row, col, direction);
+                    break;
+                } catch (IllegalArgumentException e) {
+                    // Si le boat ne peut pas être placé à la position/direction choisie, continuez à essayer avec une nouvelle position/direction.
+
+                }
+            }
+        }
+    }
+
 
     public void play() {
         Player player = playersList.get(turn % 2);
