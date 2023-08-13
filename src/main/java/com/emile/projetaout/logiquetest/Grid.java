@@ -21,6 +21,7 @@ public class Grid {
                 this.cells[i][j] = new Cell(i, j);
             }
         }
+
         this.showGrid();
     }
 
@@ -259,11 +260,6 @@ public class Grid {
     public int getLength() {
         return length;
     }
-
-
-
-
-
 
 }
 

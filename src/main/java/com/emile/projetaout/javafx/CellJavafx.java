@@ -1,8 +1,11 @@
 package com.emile.projetaout.javafx;
 
+import com.emile.projetaout.logiquetest.Boat;
 import com.emile.projetaout.logiquetest.Cell;
 import com.emile.projetaout.logiquetest.Player;
+import com.emile.projetaout.logiquetest.Position;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
 public class CellJavafx extends Rectangle {
@@ -23,11 +26,15 @@ public class CellJavafx extends Rectangle {
         return res;
     }
 
-    public void updateView(){
-        if(cell.getBoat() == null){
-            this.setFill(Color.BLUE);
-        }else{
+    public void updateView() {
+        if (cell.getBoat() == null) {
+            setFill(Color.BLUE);
+
+        } else {
             this.setFill(Color.BLACK);
+            if (cell.getBoat().isAlive()) {
+                setFill(Color.GREEN);
+            }
         }
     }
 
@@ -38,6 +45,7 @@ public class CellJavafx extends Rectangle {
     public void disallowCheat(){
         if(cell.isHit()){
             updateView();
+
         }else{
             this.setFill(Color.LIGHTGRAY);
         }
@@ -46,4 +54,7 @@ public class CellJavafx extends Rectangle {
     public Cell getCell() {
         return cell;
     }
+
+
+
 }

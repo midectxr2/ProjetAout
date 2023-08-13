@@ -11,6 +11,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +36,7 @@ public class Battleshiptest extends Parent {
 
 
 
-        CheckBox checkBoxCheat = new CheckBox("Cheat");
+
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -77,14 +78,16 @@ public class Battleshiptest extends Parent {
         Button buttonNext = new Button("NEXT");
         buttonNext.setOnMouseClicked(event -> {
             game.play();
+
             if(game.getPlayersList().get(0).isFinished()){
                 showAlert("La smartIa a gagné");
+
             }
             if(game.getPlayersList().get(1).isFinished()){
                 showAlert("L'ia de base a gagné");
             }
 
-            refreshAllView();
+            this.refreshAllView();
         });
 
 
@@ -130,21 +133,23 @@ public class Battleshiptest extends Parent {
     }
 
     public void refreshAllView(){
-            for (int i = 0; i < enemyGrid.getRowss().getChildren().size(); i++) {
-                HBox rows = (HBox) enemyGrid.getRowss().getChildren().get(i);
-                for (int j = 0; j < rows.getChildren().size(); j++) {
-                    CellJavafx cellJavafx1 = (CellJavafx) rows.getChildren().get(j);
-                    cellJavafx1.disallowCheat();
+        for (int i = 0; i < enemyGrid.getRowss().getChildren().size(); i++) {
+            HBox rows = (HBox) enemyGrid.getRowss().getChildren().get(i);
+            for (int j = 0; j < rows.getChildren().size(); j++) {
+                CellJavafx cellJavafx1 = (CellJavafx) rows.getChildren().get(j);
+                cellJavafx1.disallowCheat();
 
-                }
             }
+        }
         for(int i = 0; i < playerGrid.getRowss().getChildren().size(); i++) {
             HBox rows = (HBox) playerGrid.getRowss().getChildren().get(i);
             for (int j = 0; j < rows.getChildren().size(); j++) {
                 CellJavafx cellJavafx1 = (CellJavafx) rows.getChildren().get(j);
                 cellJavafx1.disallowCheat();
+
             }
         }
+
         System.out.println("je refresh");
         checkBoxCheat.setSelected(false);
     }
@@ -164,5 +169,9 @@ public class Battleshiptest extends Parent {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
+
+
 
 }

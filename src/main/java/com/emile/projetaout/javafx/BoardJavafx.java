@@ -32,6 +32,7 @@ public class BoardJavafx extends Parent {
                     cellJavafx1.setOnMouseClicked(e -> {
                         System.out.println("Je tire en :" + cellJavafx1.getCell().getPosition().toString());
                         if(game.getGame().play(cellJavafx1.getCell())){
+
                             //cellJavafx1.fireAt();
 
                             if(game.getGame().isFinished()){
@@ -75,7 +76,6 @@ public class BoardJavafx extends Parent {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 
 
 }
