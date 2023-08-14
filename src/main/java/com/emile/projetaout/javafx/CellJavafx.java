@@ -10,7 +10,6 @@ import javafx.scene.shape.Rectangle;
 
 public class CellJavafx extends Rectangle {
     private Cell cell;
-    private Player player;
 
     public CellJavafx(Cell cell){
         setWidth(25);
@@ -18,12 +17,6 @@ public class CellJavafx extends Rectangle {
         this.setFill(Color.LIGHTGRAY);
         this.setStroke(Color.BLACK);
         this.cell = cell;
-    }
-
-    public boolean fireAt(){
-        boolean res = cell.fireAt();
-        updateView();
-        return res;
     }
 
     public void updateView() {

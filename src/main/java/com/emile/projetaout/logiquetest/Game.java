@@ -15,13 +15,14 @@ public class Game {
 
     }
     public static void main(String[] args) throws Exception {
-        int rows = 10;
-        int col = 10;
         Game game = new Game();
-        game.loadGame("C:\\Users\\emile\\IdeaProjects\\ProjetAoutNEWNEW\\src\\main\\java\\com\\emile\\projetaout\\logiquetest\\grid.txt");
-        //game.setPlayerVsIa(rows, col, Arrays.asList(5, 4, 3, 3, 2));
+        game.loadGame("src\\main\\resources\\com\\emile\\projetaout\\grid.txt");
         System.out.println("DEBUT DU JEU");
         game.playGame();
+    }
+
+    public int getTurn() {
+        return turn;
     }
 
     public void setPlayerVsIa(int rows, int columns, List<Integer> boatsLength) {
@@ -54,18 +55,17 @@ public class Game {
     private void placeBoatPlayer(Player player){
         for (Boat boat : player.getBoats()) {
             while (true) {
-                // Choisissez une position de départ aléatoire.
+
                 int row = random.nextInt(player.getGrid().getRows());
                 int col = random.nextInt(player.getGrid().getColumns());
 
-                // Choisissez une direction aléatoire.
+
                 Direction direction = random.nextBoolean() ? Direction.HORIZONTAL : Direction.VERTICAL;
 
                 try {
                     player.getGrid().placeBoat(boat, row, col, direction);
                     break;
                 } catch (IllegalArgumentException e) {
-                    // Si le boat ne peut pas être placé à la position/direction choisie, continuez à essayer avec une nouvelle position/direction.
 
                 }
             }
@@ -86,6 +86,7 @@ public class Game {
         return res;
     }
 
+    //chat gpt
     public static void clearConsole() {
         try {
             final String os = System.getProperty("os.name");
@@ -119,23 +120,23 @@ public class Game {
         System.out.println("Fin du game");
         if (p1Win) {
             System.out.println("Le joueur a win");
+            System.out.println(turn);
         } else {
             System.out.println("l'ordi a win");
+            System.out.println(turn);
         }
     }
-
 
     public void loadGame(String filename) throws Exception {
         int row = 0;
         int col = 0;
         ArrayList<String> list = new ArrayList<>();
         try {
-            // Le fichier d'entrée
+
             FileInputStream file = new FileInputStream(filename);
             Scanner scanner = new Scanner(file);
 
 
-            //renvoie true s'il y a une autre ligne à lire
             while (scanner.hasNextLine()) {
                 row++;
                 String line =  scanner.nextLine();

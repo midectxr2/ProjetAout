@@ -1,7 +1,14 @@
 package com.emile.projetaout.javafx;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,34 +33,159 @@ public class Menu extends Application{
 
     }
     private void startGame() {
-        Battleshiptest gameScreen = new Battleshiptest();
+        Battleshiptest gameScreen = new Battleshiptest(mainStage);
 
-        // définir les actions nécessaires pour les boutons de l'écran du jeu ici
 
         Scene gameScene = new Scene(gameScreen.createContent(10, 10, Arrays.asList(5, 4, 3, 3, 2)), width, height);
+        Popup popup = gameScreen.getPopup();
+
+        Label label = new Label();
+
+        Button btn1 = new Button("REJOUER");
+        btn1.setOnAction(event -> {
+            showOptions();
+            popup.hide();
+        });
+        Button btn2 = new Button("RECOMMENCER");
+        btn2.setOnAction(event -> {
+            startGame();
+            popup.hide();
+
+        });
+        Button btn3 = new Button("QUITTER");
+        btn3.setOnAction(event -> {
+            System.exit(0);
+        });
+
+
+        HBox buttonBox = new HBox(10);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.getChildren().addAll(btn1, btn2, btn3);
+
+        VBox layout = new VBox(20);
+        layout.setStyle("-fx-background-color: white;");
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().addAll(label, buttonBox);
+        layout.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;");
+        popup.getContent().add(layout);
+
 
         mainStage.setScene(gameScene);
     }
 
     private void startGame(int row, int col, List<Integer> boatList) {
         System.out.println(boatList);
-        Battleshiptest gameScreen = new Battleshiptest();
+        Battleshiptest gameScreen = new Battleshiptest(mainStage);
 
-        // définir les actions nécessaires pour les boutons de l'écran du jeu ici
         Scene gameScene = new Scene(gameScreen.createContent(row, col, boatList), width, height);
+        Popup popup = gameScreen.getPopup();
 
+        Label label = new Label();
+
+        Button btn1 = new Button("REJOUER");
+        btn1.setOnAction(event -> {
+            showOptions();
+            popup.hide();
+        });
+        Button btn2 = new Button("RECOMMENCER");
+        btn2.setOnAction(event -> {
+            startGame(row, col, boatList);
+            popup.hide();
+
+        });
+        Button btn3 = new Button("QUITTER");
+        btn3.setOnAction(event -> {
+            System.exit(0);
+        });
+
+
+        HBox buttonBox = new HBox(10);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.getChildren().addAll(btn1, btn2, btn3);
+
+        VBox layout = new VBox(20);
+        layout.setStyle("-fx-background-color: white;");
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().addAll(label, buttonBox);
+        layout.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;");
+
+        popup.getContent().add(layout);
         mainStage.setScene(gameScene);
     }
 
     public void startGameIa(){
         Battleshiptest gameScreen = new Battleshiptest();
         Scene scene = new Scene(gameScreen.createContentSmartIaVsIa(10, 10, Arrays.asList(5, 4, 3, 3, 2)), width, height);
+        Popup popup = gameScreen.getPopup();
+
+        Label label = new Label();
+
+        Button btn1 = new Button("REJOUER");
+        btn1.setOnAction(event -> {
+            showOptions();
+            popup.hide();
+        });
+        Button btn2 = new Button("RECOMMENCER");
+        btn2.setOnAction(event -> {
+            startGameIa();
+            popup.hide();
+
+        });
+        Button btn3 = new Button("QUITTER");
+        btn3.setOnAction(event -> {
+            System.exit(0);
+        });
+
+
+        HBox buttonBox = new HBox(10);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.getChildren().addAll(btn1, btn2, btn3);
+
+        VBox layout = new VBox(20);
+        layout.setStyle("-fx-background-color: white;");
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().addAll(label, buttonBox);
+        layout.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;");
+
+        popup.getContent().add(layout);
         mainStage.setScene(scene);
     }
 
     public void startGameIa(int row, int col, List<Integer> boatList){
         Battleshiptest gameScreen = new Battleshiptest();
         Scene scene = new Scene(gameScreen.createContentSmartIaVsIa(row, col, boatList), width, height);
+        Popup popup = gameScreen.getPopup();
+
+        Label label = new Label();
+
+        Button btn1 = new Button("REJOUER");
+        btn1.setOnAction(event -> {
+            showOptions();
+            popup.hide();
+        });
+        Button btn2 = new Button("RECOMMENCER");
+        btn2.setOnAction(event -> {
+            startGameIa(row, col, boatList);
+            popup.hide();
+
+        });
+        Button btn3 = new Button("QUITTER");
+        btn3.setOnAction(event -> {
+            System.exit(0);
+        });
+
+
+        HBox buttonBox = new HBox(10);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.getChildren().addAll(btn1, btn2, btn3);
+
+        VBox layout = new VBox(20);
+        layout.setStyle("-fx-background-color: white;");
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().addAll(label, buttonBox);
+        layout.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;");
+
+        popup.getContent().add(layout);
         mainStage.setScene(scene);
     }
 
@@ -79,7 +211,6 @@ public class Menu extends Application{
             startGameIa(row, col, integerList);
         });
 
-        // définir les actions nécessaires pour les boutons de l'écran d'options ici
 
         Scene optionsScene = new Scene(optionsScreen, width, height);
 
@@ -98,4 +229,5 @@ public class Menu extends Application{
         mainStage.setScene(mainMenuScene);
         mainStage.show();
     }
+
 }

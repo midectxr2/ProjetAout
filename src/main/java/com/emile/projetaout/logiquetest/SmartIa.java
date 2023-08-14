@@ -1,9 +1,11 @@
 package com.emile.projetaout.logiquetest;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
-public class SmartIa extends Player{
+public class SmartIa extends Player {
 
     boolean firstShot = true;
     int distanceMan;

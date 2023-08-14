@@ -1,5 +1,7 @@
 package com.emile.projetaout.logiquetest;
 
+import java.util.Objects;
+
 public class Position {
     private int row;
     private int col;
@@ -9,7 +11,6 @@ public class Position {
         this.col = col;
     }
 
-    // Getters pour row et col
 
     public int getRow() {
         return row;
@@ -25,5 +26,18 @@ public class Position {
                 "row=" + row +
                 ", col=" + col +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Position)) return false;
+        Position position = (Position) o;
+        return row == position.row && col == position.col;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, col);
     }
 }

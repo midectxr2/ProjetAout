@@ -1,7 +1,9 @@
 package com.emile.projetaout.logiquetest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static java.lang.Math.abs;
 
@@ -10,7 +12,7 @@ public class Grid {
     private int columns;
     private Cell[][] cells;
 
-    private ArrayList<Boat> boatArrayList;
+
     
     public Grid(int columns, int rows){
         this.rows = rows;
@@ -39,27 +41,26 @@ public class Grid {
     }
 
     public void placeBoat(Boat boat, int row, int col, Direction direction) {
-        // Vérifiez si la position de départ est dans la grille.
+
         if (row < 0 || col < 0 || row >= rows || col >= columns) {
             throw new IllegalArgumentException("Position de départ hors de la grille.");
         }
 
-        // Vérifiez si le boat peut être placé dans la direction donnée à partir de la position de départ.
         if (direction == Direction.HORIZONTAL && col + boat.getLength() > columns || direction == Direction.VERTICAL && row + boat.getLength() > rows) {
             throw new IllegalArgumentException("Boat trop grand pour être placé à cette position dans cette direction.");
         }
 
 
-        // Vérifiez si le boat chevauche un autre boat.
+
         for (int i = 0; i < boat.getLength(); i++) {
             if (direction == Direction.HORIZONTAL) {
-                //if (cells[x + i][y].getBoat() != null) {
+
                 if (cells[row][col +i].getBoat() != null) {
                     System.out.println("Boat chevauve un autre boat");
                     throw new IllegalArgumentException("Boat chevauche un autre boat.");
                 }
             } else { // Direction.VERTICAL
-                //if (cells[x][y + i].getBoat() != null) {
+
                 if (cells[row +i][col].getBoat() != null) {
                     System.out.println("Boat chevauve un autre boat");
                     throw new IllegalArgumentException("Boat chevauche un autre boat.");
@@ -89,16 +90,12 @@ public class Grid {
 
         }
 
-
-
-
-        // Placez le boat sur la grille.
         for (int i = 0; i < boat.getLength(); i++) {
             if (direction == Direction.HORIZONTAL) {
                 cells[row][col+i].setBoat(boat);
                 boat.addCell(cells[row][col+i]);
 
-            } else { // Direction.VERTICAL
+            } else {
                 cells[row+i][col].setBoat(boat);
                 boat.addCell(cells[row+i][col]);
             }
@@ -107,15 +104,6 @@ public class Grid {
 
     public Cell[] getNeihbour(int row, int col){
         Position[] points = new Position[]{
-                /*
-                new Point2D(x-1, y),
-                new Point2D(x-1, y-1),
-                new Point2D(x, y-1),
-                new Point2D(x-1, y+1),
-                new Point2D(x+1, y),
-                new Point2D(x, y+1),
-                new Point2D(x+1, y+1),
-                new Point2D(x+1, y-1),*/
                 new Position(row, col -1),
                 new Position(row -1, col -1),
                 new Position(row -1, col),
@@ -149,24 +137,15 @@ public class Grid {
 
     public boolean fire(int x, int y) {
 
-        // Vérifiez si la position est dans la grille.
         if (x < 0 || y < 0 || x >= rows || y >= columns) {
             return false;
         }
 
         Cell cell = cells[x][y];
 
-        // Marquez la cell comme étant touchée.
-        // Return false et ne tire pas sur la cell si la cell a deja ete toucher
-
         return cell.fireAt();
 
-        // Si la cell contient un bateau, informez le bateau qu'il a été touché.
-        /*Boat bateau = cell.getBateau();
-        if (bateau != null) {
-            System.out.println("Boat touche");
-            bateau.toucher();
-        }*/
+
     }
 
     public void showGrid() {
@@ -261,5 +240,20 @@ public class Grid {
         return length;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Grid)) return false;
+        Grid grid = (Grid) o;
+        return rows == grid.rows && columns == grid.columns && length == grid.length && Arrays.equals(cells, grid.cells);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(rows, columns, length);
+        result = 31 * result + Arrays.hashCode(cells);
+        return result;
+    }
 }
 

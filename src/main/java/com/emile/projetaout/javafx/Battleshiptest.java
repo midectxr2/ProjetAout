@@ -12,14 +12,25 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Battleshiptest extends Parent {
+    Popup popup = new Popup();
+
     private BoardJavafx playerGrid, enemyGrid;
     private Game game;
     CheckBox checkBoxCheat = new CheckBox("Cheat");
+    Stage stage;
+
+    public Battleshiptest(Stage stage){
+        super();
+        this.stage = stage;
+    }
+
 
     public Parent createContent(int rows, int columns, List<Integer> list){
         BorderPane root = new BorderPane();
@@ -78,16 +89,36 @@ public class Battleshiptest extends Parent {
         Button buttonNext = new Button("NEXT");
         buttonNext.setOnMouseClicked(event -> {
             game.play();
-
-            if(game.getPlayersList().get(0).isFinished()){
-                showAlert("La smartIa a gagné");
-
-            }
-            if(game.getPlayersList().get(1).isFinished()){
-                showAlert("L'ia de base a gagné");
-            }
-
             this.refreshAllView();
+            if(game.getPlayersList().get(1).isFinished()){
+                showAlert("La smart IA a gagné " + "en " +(int) game.getTurn()/2+" tours.");
+
+            }
+            if(game.getPlayersList().get(0).isFinished()){
+                showAlert("L'IA a gagné " + "en " +(int) game.getTurn()/2+" tours.");
+            }
+
+
+        });
+
+        Button buttonFinish = new Button("FINIR LA PARTIE");
+        buttonFinish.setOnMouseClicked(event -> {
+            while(!game.isFinished()){
+                game.play();
+            }
+            refreshAllView();
+            if(game.getPlayersList().get(1).isFinished()){
+                showAlert("La smart IA a gagné " + "en " +(int) game.getTurn()/2+" tours.");
+
+
+            }
+            if(game.getPlayersList().get(0).isFinished()){
+                showAlert("L'IA a gagné " + "en " +(int) game.getTurn()/2+" tours.");
+
+
+            }
+
+
         });
 
 
@@ -103,7 +134,7 @@ public class Battleshiptest extends Parent {
             }
         };
         checkBoxCheat.setOnAction(event);
-        VBox rightVbox = new VBox(50, checkBoxCheat, buttonNext);
+        VBox rightVbox = new VBox(50, checkBoxCheat, buttonNext, buttonFinish);
         rightVbox.setAlignment(Pos.CENTER);
         root.setRight(rightVbox);
         root.setCenter(vbox);
@@ -159,19 +190,16 @@ public class Battleshiptest extends Parent {
         return game;
     }
 
-    public BoardJavafx getPlayerGrid() {
-        return playerGrid;
-    }
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+
+    public void showAlert(String message) {
+        VBox vbox = (VBox)popup.getContent().get(0);
+        Label label = (Label)vbox.getChildren().get(0);
+        label.setText(message);
+        popup.show(stage);
     }
 
 
-
-
-
+    public Popup getPopup() {
+        return popup;
+    }
 }

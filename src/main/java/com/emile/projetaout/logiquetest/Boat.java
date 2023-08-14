@@ -2,6 +2,7 @@ package com.emile.projetaout.logiquetest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Boat {
     private int length;
@@ -20,13 +21,6 @@ public class Boat {
         return length;
     }
 
-    public List<Cell> getCell() {
-        return cells;
-    }
-
-    public void setLength(int taille) {
-        this.length = taille;
-    }
 
     public void addCell(Cell cell) {
         this.cells.add(cell);
@@ -49,5 +43,18 @@ public class Boat {
 
     public boolean isAlive() {
         return this.health <= 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Boat)) return false;
+        Boat boat = (Boat) o;
+        return length == boat.length && health == boat.health;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(length, health, cells);
     }
 }

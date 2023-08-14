@@ -1,12 +1,13 @@
 package com.emile.projetaout.logiquetest;
 
+import java.util.Objects;
+
 public class Cell {
 
     private boolean etat; // false si la cellule n'a pas été touchée, true sinon
     private Boat boat; // Référence au boat qui occupe cette cellule, null si aucune
 
     private Position position;
-
 
 
     public Cell(int x, int y) {
@@ -55,6 +56,18 @@ public class Cell {
         return position;
     }
 
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cell)) return false;
+        Cell cell = (Cell) o;
+        return etat == cell.etat && Objects.equals(boat, cell.boat) && Objects.equals(position, cell.position);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(etat, boat, position);
+    }
 }
 

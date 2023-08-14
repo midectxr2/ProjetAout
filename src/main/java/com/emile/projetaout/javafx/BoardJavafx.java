@@ -3,8 +3,10 @@ package com.emile.projetaout.javafx;
 import com.emile.projetaout.logiquetest.*;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 
 import java.util.Random;
 
@@ -14,10 +16,7 @@ public class BoardJavafx extends Parent {
     private Battleshiptest game;
     private Grid grid;
     private VBox rowss = new VBox();
-    Random random = new Random();
-
     boolean isPlayer;
-
     public BoardJavafx(Battleshiptest game, Grid grid, boolean isPlayer) {
         this.game = game;
         this.grid = grid;
@@ -32,22 +31,18 @@ public class BoardJavafx extends Parent {
                     cellJavafx1.setOnMouseClicked(e -> {
                         System.out.println("Je tire en :" + cellJavafx1.getCell().getPosition().toString());
                         if(game.getGame().play(cellJavafx1.getCell())){
-
-                            //cellJavafx1.fireAt();
+                            game.refreshAllView();
 
                             if(game.getGame().isFinished()){
-                                showAlert("Le joueur a gagné");
+
+                                showAlert("Le joueur a gagné " + "en " +(int) game.getGame().getTurn()/2+" tours.");
                             }else{
                                 System.out.println(grid.distanceMan(cellJavafx1.getCell()));
                                 System.out.println(grid.lengthNearestBoat());
                                 game.getGame().play();
                                 game.refreshAllView();
 
-                                //Ia ia = (Ia) game.getGame().getPlayersList().get(1);
-                                //HBox rows_grid = (HBox) game.getPlayerGrid().getRowss().getChildren().get(ia.getLastX());
-                                //CellJavafx cell = (CellJavafx) rows_grid.getChildren().get(ia.getLastY());
-                                //cell.fireAt();
-                                if (game.getGame().isFinished())showAlert("Le bot a gagné");
+                                if (game.getGame().isFinished())showAlert("L'IA a gagné " + "en " +(int) game.getGame().getTurn()/2+" tours.");
                             }
                         }else{
                             System.out.println("Tirez ailleurs!");
@@ -70,11 +65,8 @@ public class BoardJavafx extends Parent {
 
 
     private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+
+        game.showAlert(message);
     }
 
 
