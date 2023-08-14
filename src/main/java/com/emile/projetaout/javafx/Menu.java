@@ -114,7 +114,7 @@ public class Menu extends Application{
     }
 
     public void startGameIa(){
-        Battleshiptest gameScreen = new Battleshiptest();
+        Battleshiptest gameScreen = new Battleshiptest(mainStage);
         Scene scene = new Scene(gameScreen.createContentSmartIaVsIa(10, 10, Arrays.asList(5, 4, 3, 3, 2)), width, height);
         Popup popup = gameScreen.getPopup();
 
@@ -152,7 +152,7 @@ public class Menu extends Application{
     }
 
     public void startGameIa(int row, int col, List<Integer> boatList){
-        Battleshiptest gameScreen = new Battleshiptest();
+        Battleshiptest gameScreen = new Battleshiptest(mainStage);
         Scene scene = new Scene(gameScreen.createContentSmartIaVsIa(row, col, boatList), width, height);
         Popup popup = gameScreen.getPopup();
 
