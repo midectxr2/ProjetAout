@@ -27,12 +27,16 @@ public class Battleshiptest extends Parent {
     CheckBox checkBoxCheat = new CheckBox("Cheat");
     Stage stage;
 
+    //constructeur Battleshiptest
+
     public Battleshiptest(Stage stage){
         super();
         this.stage = stage;
     }
 
-
+    /*
+    methode qui créer une partie joueur vs ia et qui creer les 2 grilles javafx des 2 joueurs
+     */
     public Parent createContent(int rows, int columns, List<Integer> list){
         BorderPane root = new BorderPane();
         root.setPrefSize(600, 800);
@@ -74,6 +78,11 @@ public class Battleshiptest extends Parent {
 
 
     }
+
+
+    /*
+    methode qui créer une partie smartia vs ia et qui creer les 2 grilles javafx des 2 joueurs + le bouton pour finir la partie directement avec ses events
+     */
     public Parent createContentSmartIaVsIa(int rows, int columns, List<Integer> list){
         BorderPane root = new BorderPane();
         root.setPrefSize(600, 800);
@@ -143,7 +152,8 @@ public class Battleshiptest extends Parent {
     }
 
 
-
+    // methode qui active le cheat en recupérant d'abord toutes les HBOX de le la grille adverse puis Les Cellules javafx contenues dans les HBOX
+    // et appelle la fonction allowcheat de cellule javafx voir sa description
     public void allowCheat(){
         for(int i = 0; i < enemyGrid.getRowss().getChildren().size(); i++) {
             HBox rows = (HBox) enemyGrid.getRowss().getChildren().get(i);
@@ -154,6 +164,8 @@ public class Battleshiptest extends Parent {
         }
     }
 
+    //meme methode que allow cheat mais ici pour desactiver le cheat
+    //voir def de disallow cheat dans cellulejavafx
     public void disallowCheat(){
         for(int i = 0; i < enemyGrid.getRowss().getChildren().size(); i++) {
             HBox rows = (HBox) enemyGrid.getRowss().getChildren().get(i);
@@ -164,6 +176,10 @@ public class Battleshiptest extends Parent {
         }
     }
 
+
+    //methode qui permet d'actualiser a chaque tour les 2 grilles avec les changement effectués
+    //par exemple bateau touché donc case en noir etc.
+    // voir methode disallow cheat cellulejavafx
     public void refreshAllView(){
         for (int i = 0; i < enemyGrid.getRowss().getChildren().size(); i++) {
             HBox rows = (HBox) enemyGrid.getRowss().getChildren().get(i);
@@ -185,13 +201,13 @@ public class Battleshiptest extends Parent {
         System.out.println("je refresh");
         checkBoxCheat.setSelected(false);
     }
-
-
+    //guetteur de game
     public Game getGame() {
         return game;
     }
 
 
+    //methode qui affiche l'alerte de fin de partie
     public void showAlert(String message) {
         VBox vbox = (VBox)popup.getContent().get(0);
         Label label = (Label)vbox.getChildren().get(0);
@@ -199,7 +215,7 @@ public class Battleshiptest extends Parent {
         popup.show(stage);
     }
 
-
+    //guetter de popup
     public Popup getPopup() {
         return popup;
     }

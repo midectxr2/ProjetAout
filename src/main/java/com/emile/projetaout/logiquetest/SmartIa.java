@@ -9,11 +9,14 @@ public class SmartIa extends Player {
 
     Random random = new Random();
 
-
+    //constructeur de l'ia intelligente
     public SmartIa(Grid grid, List<Integer> boatsLength) {
         super(grid, boatsLength);
     }
 
+
+
+    //methode play de l'ia intelligente, decrite plus précisement dans le rapport
     @Override
     public void play(Grid grid) {
         if (cellArrayList.size() == 0) {

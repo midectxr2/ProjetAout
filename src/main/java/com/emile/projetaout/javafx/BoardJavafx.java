@@ -17,6 +17,11 @@ public class BoardJavafx extends Parent {
     private Grid grid;
     private VBox rowss = new VBox();
     boolean isPlayer;
+
+    /*
+    méthode qui creer les grille de jeu en javafx ainsi que ses conditions en fonction d'a qui appartient la grille
+    elle permet surtout de gerer le moment ou l'on veut jouer en player vs ia cad lorsque l'on clique directement sur la grille
+     */
     public BoardJavafx(Battleshiptest game, Grid grid, boolean isPlayer) {
         this.game = game;
         this.grid = grid;
@@ -58,12 +63,13 @@ public class BoardJavafx extends Parent {
     }
 
 
-
+    // guetteur de Rowss (Vbox)
     public VBox getRowss() {
         return rowss;
     }
 
 
+    //methode qui permet de recuprer le showalert de la classe Game
     private void showAlert(String message) {
 
         game.showAlert(message);

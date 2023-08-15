@@ -26,12 +26,16 @@ public class Menu extends Application{
 
 
 
+
     public void start(Stage stage) throws IOException {
         mainStage = stage;
         mainStage.setResizable(false);
         showMainMenu();
 
     }
+
+
+    //methode startgame, qui permet de creer le jeu en joueur vs ia sur la configuration de base
     private void startGame() {
         Battleshiptest gameScreen = new Battleshiptest(mainStage);
 
@@ -62,6 +66,8 @@ public class Menu extends Application{
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(btn1, btn2, btn3);
 
+
+        //bout de code de chatgpt
         VBox layout = new VBox(20);
         layout.setStyle("-fx-background-color: white;");
         layout.setAlignment(Pos.CENTER);
@@ -73,6 +79,9 @@ public class Menu extends Application{
         mainStage.setScene(gameScene);
     }
 
+
+
+    //methode startgame, qui permet de creer le jeu en joueur vs ia sur la configuration modifiée dans les options
     private void startGame(int row, int col, List<Integer> boatList) {
         System.out.println(boatList);
         Battleshiptest gameScreen = new Battleshiptest(mainStage);
@@ -113,6 +122,10 @@ public class Menu extends Application{
         mainStage.setScene(gameScene);
     }
 
+
+
+    //methode startgameia, qui permet de creer le jeu en smartia vs ia sur la configuration de base
+
     public void startGameIa(){
         Battleshiptest gameScreen = new Battleshiptest(mainStage);
         Scene scene = new Scene(gameScreen.createContentSmartIaVsIa(10, 10, Arrays.asList(5, 4, 3, 3, 2)), width, height);
@@ -151,6 +164,8 @@ public class Menu extends Application{
         mainStage.setScene(scene);
     }
 
+
+    //methode startgameia, qui permet de creer le jeu en smartia vs ia sur la configuration modifiée
     public void startGameIa(int row, int col, List<Integer> boatList){
         Battleshiptest gameScreen = new Battleshiptest(mainStage);
         Scene scene = new Scene(gameScreen.createContentSmartIaVsIa(row, col, boatList), width, height);
@@ -189,6 +204,7 @@ public class Menu extends Application{
         mainStage.setScene(scene);
     }
 
+    //methode showoptions qui permet d'afficher le menu des otpions ainsi que de recuperer les options selectionées
     private void showOptions() {
         Options optionsScreen = new Options();
 
@@ -217,6 +233,7 @@ public class Menu extends Application{
         mainStage.setScene(optionsScene);
     }
 
+    //methode showmainmenu qui permet d'afficher le menu
     private void showMainMenu() {
         GameMenu mainMenu = new GameMenu();
         mainMenu.getIaPlayButton().setOnAction(event -> startGameIa());

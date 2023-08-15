@@ -6,16 +6,20 @@ public class Position {
     private int row;
     private int col;
 
+
+    //constructeur de position
     public Position(int row, int col) {
         this.row = row;
         this.col = col;
     }
 
-
+    //getter de row
     public int getRow() {
         return row;
     }
 
+
+    //getter de col
     public int getCol() {
         return col;
     }
@@ -28,6 +32,9 @@ public class Position {
                 '}';
     }
 
+
+
+    //methode normalement utilisée dans les tests, voir rapport explications.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,6 +43,8 @@ public class Position {
         return row == position.row && col == position.col;
     }
 
+
+    //methode normalement utilisée dans les tests, voir rapport explications.
     @Override
     public int hashCode() {
         return Objects.hash(row, col);

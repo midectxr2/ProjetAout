@@ -20,6 +20,8 @@ public class Display extends VBox {
     private int nbr = defaultValue;
 
 
+
+    //methode qui permet de creer les choice box dans le panneau OPTIONS
     public Display(int nb){
         boats = new ChoiceBox(FXCollections.observableArrayList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
         final int[] value = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -39,6 +41,9 @@ public class Display extends VBox {
 
     }
 
+
+
+    //getter de nbr
     public int getNbr(){
         return nbr;
     }

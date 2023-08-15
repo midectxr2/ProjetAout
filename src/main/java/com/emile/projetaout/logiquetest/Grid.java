@@ -11,9 +11,11 @@ public class Grid {
     private int rows;
     private int columns;
     private Cell[][] cells;
+    private int length;
 
 
-    
+
+    //constructeur de grille, creer une matrice de cellules
     public Grid(int columns, int rows){
         this.rows = rows;
         this.columns = columns;
@@ -27,19 +29,31 @@ public class Grid {
         this.showGrid();
     }
 
+
+    //getter de rows
     public int getRows() {
         return rows;
     }
 
+
+
+    //getter de columns
     public int getColumns() {
         return columns;
     }
 
 
+
+    //getter de cell en fonction d'un x et y
     public Cell getCell(int x, int y) {
         return cells[x][y];
     }
 
+
+
+
+    //fonction place boat, permet de place un bateau donné sur la grille
+    //algo developpé dans le rapport
     public void placeBoat(Boat boat, int row, int col, Direction direction) {
 
         if (row < 0 || col < 0 || row >= rows || col >= columns) {
@@ -102,6 +116,9 @@ public class Grid {
         }
     }
 
+
+    //methode qui permet de regarde au alentour d'une cellule (d'un x et d'un y), à 1 de distance pour savoir si
+    //il y a un bateau ou non trop proche pour pouvoir en placer un autre
     public Cell[] getNeihbour(int row, int col){
         Position[] points = new Position[]{
                 new Position(row, col -1),
@@ -126,15 +143,22 @@ public class Grid {
 
     }
 
+
+    //methode qui appelle valid point du dessous
     public boolean isValidPoint(Position point2D){
         return isValidPoint(point2D.getRow(), point2D.getCol());
     }
 
+
+    //methode qui regarde si le point (x et y) donné est dans la grille ou non, retourne vrai ou faux en fonction
     public boolean isValidPoint(int row, int col){
         return row >=0 && row < getRows() && col >=0 && col < getColumns();
     }
 
 
+
+    //methode fire de grille qui permet en fonction d'un x et d'un y, de regarder si ils sont dans la grille et si oui, appelle la fonction
+    //fireAt de cellule
     public boolean fire(int x, int y) {
 
         if (x < 0 || y < 0 || x >= rows || y >= columns) {
@@ -148,6 +172,7 @@ public class Grid {
 
     }
 
+    //methode show grid , permet d'afficher la grille dans le terminal, (choix personnel)
     public void showGrid() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -168,6 +193,8 @@ public class Grid {
         System.out.println("\n");
     }
 
+
+    //methode cheat mode utilisée pour le début de la grille en console, elle affiche les bateaux de l'adversaire
     public void cheatMode() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -185,7 +212,9 @@ public class Grid {
     }
 
 
-    private int length;
+
+    //methode qui permet d'en fonction d'une cellule de calculer la distance entre cette celulle et le bateaux le plus proches
+    // et change aussi la taille du bateaux le plus proche si plusieurs bateaux sont  a une meme distance
 
     public int distanceMan(Cell cell){
         ArrayList<Cell> cellArrayList = new ArrayList<>();
@@ -232,15 +261,24 @@ public class Grid {
         return tmp;
     }
 
+
+
+    //methode qui retourne la longueur du bateau le plus proche
     public int lengthNearestBoat(){
         return getLength();
     }
 
+
+    //getter de length (taille bateau)
     public int getLength() {
         return length;
     }
 
 
+
+
+
+    //methode normalement utilisée dans les tests, voir rapport explications.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -249,6 +287,8 @@ public class Grid {
         return rows == grid.rows && columns == grid.columns && length == grid.length && Arrays.equals(cells, grid.cells);
     }
 
+
+    //methode normalement utilisée dans les tests, voir rapport explications.
     @Override
     public int hashCode() {
         int result = Objects.hash(rows, columns, length);
