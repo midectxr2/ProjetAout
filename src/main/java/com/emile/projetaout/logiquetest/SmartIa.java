@@ -24,9 +24,9 @@ public class SmartIa extends Player {
             int col = (int) grid.getColumns() / 2;
             Cell cell = grid.getCell(row, col);
             int distanceMan = grid.distanceMan(cell);
-            System.out.println(distanceMan);
+            System.out.println("distance man: "+distanceMan);
             int boatLength = grid.lengthNearestBoat();
-            System.out.println(boatLength);
+            System.out.println("lg bateau le plus proche: " +boatLength);
             cellArrayList.add(cell);
             grid.fire(row, col);
         } else {
@@ -36,8 +36,8 @@ public class SmartIa extends Player {
             int distance = grid.distanceMan(cell);
             int length = grid.lengthNearestBoat();
 
-            System.out.println(distance);
-            System.out.println(length);
+            System.out.println("distance man: "+distance);
+            System.out.println("lg bateau le plus proche: "+ length);
 
             if (distance == 0) {
                 int cellRow = cell.getPosition().getRow();

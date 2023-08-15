@@ -198,7 +198,7 @@ public class Battleshiptest extends Parent {
             }
         }
 
-        System.out.println("je refresh");
+
         checkBoxCheat.setSelected(false);
     }
     //guetteur de game

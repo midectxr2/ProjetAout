@@ -36,7 +36,7 @@ public class Ia extends Player{
             LastY = random.nextInt(grid.getColumns());
         }
 
-        System.out.println("l'ia baka a tirée en LastX: "+LastX+", LastY: "+LastY);
+        System.out.println("l'ia basique a tirée en LastX: "+LastX+", LastY: "+LastY);
         grid.showGrid();
     }
 

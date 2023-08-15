@@ -150,13 +150,13 @@ public class Game {
             play();
         }
         boolean p1Win = !playersList.get(1).isFinished();
-        System.out.println("Fin du game");
+        System.out.println("Fin du jeu");
         if (p1Win) {
             System.out.println("Le joueur a win");
-            System.out.println(turn);
+            System.out.println("score : " +turn);
         } else {
             System.out.println("l'ordi a win");
-            System.out.println(turn);
+            System.out.println("score : "+turn);
         }
     }
 
@@ -249,7 +249,6 @@ public class Game {
     public void launchLoadedGame(Grid grid, ArrayList<Boat> boats){
         Player player = new Player(grid);
         player.setBoats(boats);
-        System.out.println(player.getBoats().toString());
         Ia ia = new Ia(new Grid(grid.getRows(), grid.getColumns()));
 
         ArrayList<Boat> boatsIA = new ArrayList<>();

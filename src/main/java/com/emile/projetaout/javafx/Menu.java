@@ -83,7 +83,7 @@ public class Menu extends Application{
 
     //methode startgame, qui permet de creer le jeu en joueur vs ia sur la configuration modifiée dans les options
     private void startGame(int row, int col, List<Integer> boatList) {
-        System.out.println(boatList);
+
         Battleshiptest gameScreen = new Battleshiptest(mainStage);
 
         Scene gameScene = new Scene(gameScreen.createContent(row, col, boatList), width, height);

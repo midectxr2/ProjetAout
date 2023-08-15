@@ -47,7 +47,7 @@ public class Boat {
     //methode hit, elle permet de retirer de la vie a l'attribut health du bateau
     public void hit() {
         this.health -= 1;
-        System.out.println("Je perds de la health: " + this.health);
+        System.out.println("Je perds de la vie: " + this.health);
     }
 
 

@@ -177,7 +177,7 @@ public class Grid {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 if (cells[i][j].isHit()) {
-                    //System.out.println(cells[i][j].toString());
+
 
                     if (cells[i][j].getBoat() != null) {
                         System.out.print("O "); // Tir réussi
@@ -198,7 +198,7 @@ public class Grid {
     public void cheatMode() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                //System.out.println(cells[i][j].toString());
+
 
                 if (cells[i][j].getBoat() != null) {
                     System.out.print("O "); // Tir réussi

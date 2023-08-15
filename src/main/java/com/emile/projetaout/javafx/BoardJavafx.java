@@ -41,8 +41,8 @@ public class BoardJavafx extends Parent {
 
                                 showAlert("Le joueur a gagné " + "en " +(int) game.getGame().getTurn()/2+" tours.");
                             }else{
-                                System.out.println(grid.distanceMan(cellJavafx1.getCell()));
-                                System.out.println(grid.lengthNearestBoat());
+                                System.out.println("Distace man: "+grid.distanceMan(cellJavafx1.getCell()));
+                                System.out.println("Longueur du bateau le plus proche :" +grid.lengthNearestBoat());
                                 game.getGame().play();
                                 game.refreshAllView();
 
