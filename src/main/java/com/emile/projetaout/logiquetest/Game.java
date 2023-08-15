@@ -34,7 +34,7 @@ public class Game {
     }
 
     public void setSmartIaVsIa(int rows, int columns, List<Integer> boatsLength) {
-        Ia p1 = new Ia(new Grid(rows, columns), boatsLength);
+        SmartIa p1 = new SmartIa(new Grid(rows, columns), boatsLength);
         Ia p2 = new Ia(new Grid(rows, columns), boatsLength);
         playersList.add(p1);
         playersList.add(p2);

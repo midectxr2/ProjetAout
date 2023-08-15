@@ -56,13 +56,13 @@ public class Grid {
             if (direction == Direction.HORIZONTAL) {
 
                 if (cells[row][col +i].getBoat() != null) {
-                    System.out.println("Boat chevauve un autre boat");
+
                     throw new IllegalArgumentException("Boat chevauche un autre boat.");
                 }
             } else { // Direction.VERTICAL
 
                 if (cells[row +i][col].getBoat() != null) {
-                    System.out.println("Boat chevauve un autre boat");
+
                     throw new IllegalArgumentException("Boat chevauche un autre boat.");
                 }
             }
@@ -126,11 +126,11 @@ public class Grid {
 
     }
 
-    private boolean isValidPoint(Position point2D){
+    public boolean isValidPoint(Position point2D){
         return isValidPoint(point2D.getRow(), point2D.getCol());
     }
 
-    private boolean isValidPoint(int row, int col){
+    public boolean isValidPoint(int row, int col){
         return row >=0 && row < getRows() && col >=0 && col < getColumns();
     }
 

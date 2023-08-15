@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Cell {
 
+
     private boolean etat; // false si la cellule n'a pas été touchée, true sinon
     private Boat boat; // Référence au boat qui occupe cette cellule, null si aucune
 
@@ -42,7 +43,6 @@ public class Cell {
             if (this.boat != null) {
                 this.boat.hit();
                 if(!boat.isAlive()){
-                    System.out.println("touché coulé");
                 }
             }
 
@@ -69,5 +69,7 @@ public class Cell {
     public int hashCode() {
         return Objects.hash(etat, boat, position);
     }
+
+
 }
 
