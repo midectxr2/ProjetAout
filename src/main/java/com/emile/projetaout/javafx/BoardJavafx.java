@@ -34,7 +34,6 @@ public class BoardJavafx extends Parent {
                 rows.getChildren().add(cellJavafx1);
                 if(isPlayer) {
                     cellJavafx1.setOnMouseClicked(e -> {
-                        System.out.println("Je tire en :" + cellJavafx1.getCell().getPosition().toString());
                         if(game.getGame().play(cellJavafx1.getCell())){
                             game.refreshAllView();
 

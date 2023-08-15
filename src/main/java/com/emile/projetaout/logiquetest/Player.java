@@ -71,7 +71,7 @@ public class Player {
         System.out.println("Entrez la colonne");
         int y = sc.nextInt();
         Game.clearConsole();
-        System.out.println("Vous avez tiré en x: "+x+", y: "+y);
+
 
         while (!grid.fire(x, y)){
             System.out.println("Entrez une valeur correcte");
@@ -80,7 +80,7 @@ public class Player {
             System.out.println("Entrez la colonne");
             y = sc.nextInt();
             Game.clearConsole();
-            System.out.println("Vous avez tiré en x: "+x+", y: "+y);
+
         }
         grid.showGrid();
     }

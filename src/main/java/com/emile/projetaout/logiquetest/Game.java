@@ -192,12 +192,12 @@ public class Game {
 
         Grid grid = new Grid(row, col);
         ArrayList<Boat> listBoats = new ArrayList<>();
-        System.out.println(list);
+
 
         for(int i=0; i<list.size(); i++){
             String string = list.get(i);
 
-            System.out.println(string);
+
 
             for(int j=0; j<string.length(); j++){
                 char c = string.charAt(j);
