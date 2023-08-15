@@ -27,7 +27,7 @@ public class BoardJavafx extends Parent {
             for (int y = 0; y < grid.getColumns(); y++) {
                 CellJavafx cellJavafx1 = new CellJavafx(grid.getCell(x, y));
                 rows.getChildren().add(cellJavafx1);
-                if(!isPlayer) {
+                if(isPlayer) {
                     cellJavafx1.setOnMouseClicked(e -> {
                         System.out.println("Je tire en :" + cellJavafx1.getCell().getPosition().toString());
                         if(game.getGame().play(cellJavafx1.getCell())){
