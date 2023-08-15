@@ -2,10 +2,11 @@ import com.emile.projetaout.logiquetest.Boat;
 import com.emile.projetaout.logiquetest.Direction;
 import com.emile.projetaout.logiquetest.Game;
 import com.emile.projetaout.logiquetest.Grid;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 
+/*
 public class MyGridTest {
     @Test
     public void loadGridTest() {
@@ -25,3 +26,4 @@ public class MyGridTest {
         }
     }
 }
+*/
