@@ -43,8 +43,8 @@ public class Options extends VBox {
         hBox_grid.setSpacing(10);
 
         Text gridLength = new Text("Taille Grille: ");
-        Text row_length = new Text("Lignes: ");
-        Text col_length = new Text("Colonnes: ");
+        Text row_length = new Text("Colonnes: ");
+        Text col_length = new Text("Lignes: ");
 
 
         col = new ChoiceBox(FXCollections.observableArrayList("5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"));

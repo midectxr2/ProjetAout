@@ -51,3 +51,23 @@ jlink {
 jlinkZip {
     group = 'distribution'
 }
+
+
+task stat(type: JavaExec){
+    description = 'Run the statistic mode'
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    main = 'com.emile.projetaout.logiquetest.MainStat'
+}
+
+if (project.hasProperty("statArg")) {
+    args(project.property("statArg"))
+}
+
+
+task txt(type: JavaExec){
+    description = 'Run the statistic mode'
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    main = 'com.emile.projetaout.logiquetest.Game'
+}

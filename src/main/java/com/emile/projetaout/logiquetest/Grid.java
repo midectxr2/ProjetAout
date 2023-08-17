@@ -26,7 +26,7 @@ public class Grid {
             }
         }
 
-        this.showGrid();
+        //this.showGrid();
     }
 
 
@@ -159,13 +159,13 @@ public class Grid {
 
     //methode fire de grille qui permet en fonction d'un x et d'un y, de regarder si ils sont dans la grille et si oui, appelle la fonction
     //fireAt de cellule
-    public boolean fire(int x, int y) {
+    public boolean fire(int row, int col) {
 
-        if (x < 0 || y < 0 || x >= rows || y >= columns) {
+        if (row < 0 || col < 0 || row >= rows || col >= columns) {
             return false;
         }
 
-        Cell cell = cells[x][y];
+        Cell cell = cells[row][col];
 
         return cell.fireAt();
 
@@ -174,10 +174,15 @@ public class Grid {
 
     //methode show grid , permet d'afficher la grille dans le terminal, (choix personnel)
     public void showGrid() {
+
+        for (int i = 0; i < columns; i++){
+            System.out.print(" " + i );
+        }
+        System.out.println();
         for (int i = 0; i < rows; i++) {
+            System.out.print(i);
             for (int j = 0; j < columns; j++) {
                 if (cells[i][j].isHit()) {
-
 
                     if (cells[i][j].getBoat() != null) {
                         System.out.print("O "); // Tir réussi

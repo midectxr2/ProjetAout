@@ -50,7 +50,7 @@ public class Player {
     //en regardant si tout les bateaux du joueur sont coulés ou non
     public boolean isFinished() {
         for (Boat boat : this.boats) {
-            if (!boat.isAlive()) {
+            if (!boat.isDead()) {
                 return false;
             }
         }

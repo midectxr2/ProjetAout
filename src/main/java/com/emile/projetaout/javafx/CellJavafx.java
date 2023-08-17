@@ -1,11 +1,7 @@
 package com.emile.projetaout.javafx;
 
-import com.emile.projetaout.logiquetest.Boat;
 import com.emile.projetaout.logiquetest.Cell;
-import com.emile.projetaout.logiquetest.Player;
-import com.emile.projetaout.logiquetest.Position;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
 public class CellJavafx extends Rectangle {
@@ -30,7 +26,7 @@ public class CellJavafx extends Rectangle {
 
         } else {
             this.setFill(Color.BLACK);
-            if (cell.getBoat().isAlive()) {
+            if (cell.getBoat().isDead()) {
                 setFill(Color.GREEN);
             }
         }

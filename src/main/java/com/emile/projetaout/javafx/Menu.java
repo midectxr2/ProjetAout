@@ -121,6 +121,45 @@ public class Menu extends Application{
         popup.getContent().add(layout);
         mainStage.setScene(gameScene);
     }
+    private void startGamePlayervsSmartia() {
+
+        Battleshiptest gameScreen = new Battleshiptest(mainStage);
+
+        Scene gameScene = new Scene(gameScreen.createContentPlayervsSmartIa(10, 10, Arrays.asList(2, 3, 3, 4, 5)), width, height);
+        Popup popup = gameScreen.getPopup();
+
+        Label label = new Label();
+
+        Button btn1 = new Button("REJOUER");
+        btn1.setOnAction(event -> {
+            showMainMenu();
+            popup.hide();
+        });
+        Button btn2 = new Button("RECOMMENCER");
+        btn2.setOnAction(event -> {
+            startGame();
+            popup.hide();
+
+        });
+        Button btn3 = new Button("QUITTER");
+        btn3.setOnAction(event -> {
+            System.exit(0);
+        });
+
+
+        HBox buttonBox = new HBox(10);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.getChildren().addAll(btn1, btn2, btn3);
+
+        VBox layout = new VBox(20);
+        layout.setStyle("-fx-background-color: white;");
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().addAll(label, buttonBox);
+        layout.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;");
+
+        popup.getContent().add(layout);
+        mainStage.setScene(gameScene);
+    }
 
 
 
@@ -236,6 +275,7 @@ public class Menu extends Application{
     //methode showmainmenu qui permet d'afficher le menu
     private void showMainMenu() {
         GameMenu mainMenu = new GameMenu();
+        mainMenu.getSmartIaPlay().setOnAction(event -> startGamePlayervsSmartia());
         mainMenu.getIaPlayButton().setOnAction(event -> startGameIa());
         mainMenu.getStartButton().setOnAction(event -> startGame());
         mainMenu.getOptionsButton().setOnAction(event -> showOptions());

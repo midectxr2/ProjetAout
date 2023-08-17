@@ -27,6 +27,10 @@ public class BoardJavafx extends Parent {
         this.grid = grid;
         this.isPlayer = isPlayer;
 
+
+
+
+
         for (int x = 0; x < grid.getRows(); x++) {
             HBox rows = new HBox();
             for (int y = 0; y < grid.getColumns(); y++) {
@@ -43,6 +47,7 @@ public class BoardJavafx extends Parent {
                             }else{
                                 System.out.println("Distace man: "+grid.distanceMan(cellJavafx1.getCell()));
                                 System.out.println("Longueur du bateau le plus proche :" +grid.lengthNearestBoat());
+                                System.out.println("--------------------------------------------------------" + "\n");
                                 game.getGame().play();
                                 game.refreshAllView();
 

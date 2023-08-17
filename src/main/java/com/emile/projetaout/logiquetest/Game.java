@@ -50,6 +50,14 @@ public class Game {
         this.initGame();
     }
 
+    public void setPlayerVsSmartIa(int rows, int columns, List<Integer> boatsLength) {
+        Player p1 = new Player(new Grid(rows, columns), boatsLength);
+        SmartIa p2 = new SmartIa(new Grid(rows, columns), boatsLength);
+        playersList.add(p1);
+        playersList.add(p2);
+        this.initGame();
+    }
+
 
     //getter de la playerlist
     public List<Player> getPlayersList() {

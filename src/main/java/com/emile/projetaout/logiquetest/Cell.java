@@ -55,7 +55,7 @@ public class Cell {
             this.etat = true;
             if (this.boat != null) {
                 this.boat.hit();
-                if(!boat.isAlive()){
+                if(!boat.isDead()){
                 }
             }
 

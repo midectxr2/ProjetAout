@@ -41,13 +41,17 @@ public class Battleshiptest extends Parent {
         BorderPane root = new BorderPane();
         root.setPrefSize(600, 800);
 
+        Label label = new Label("GRILLE IA");
+        Label label1 = new Label("GRILLE JOUEUR");
+        label1.setAlignment(Pos.CENTER);
+        label.setAlignment(Pos.CENTER);
         game = new Game();
         game.setPlayerVsIa(rows , columns , list);
 
         enemyGrid = new BoardJavafx(this, game.getPlayersList().get(1).getGrid(), true);
         playerGrid = new BoardJavafx(this, game.getPlayersList().get(0).getGrid(), false);
 
-        VBox vbox = new VBox(50, enemyGrid, playerGrid);
+        VBox vbox = new VBox(30, label, enemyGrid, label1 ,playerGrid);
         vbox.setAlignment(Pos.CENTER);
 
 
@@ -83,6 +87,49 @@ public class Battleshiptest extends Parent {
     /*
     methode qui créer une partie smartia vs ia et qui creer les 2 grilles javafx des 2 joueurs + le bouton pour finir la partie directement avec ses events
      */
+
+    public Parent createContentPlayervsSmartIa(int rows, int columns, List<Integer> list){
+        BorderPane root = new BorderPane();
+        root.setPrefSize(600, 800);
+
+        game = new Game();
+        game.setPlayerVsSmartIa(rows, columns, list);
+
+        Label label = new Label("GRILLE SMART IA");
+        Label label1 = new Label("GRILLE JOUEUR");
+        label1.setAlignment(Pos.CENTER);
+        label.setAlignment(Pos.CENTER);
+        enemyGrid = new BoardJavafx(this, game.getPlayersList().get(1).getGrid(), true);
+        playerGrid = new BoardJavafx(this, game.getPlayersList().get(0).getGrid(), false);
+
+         VBox vbox = new VBox(30, label, enemyGrid, label1 ,playerGrid);
+        vbox.setAlignment(Pos.CENTER);
+
+        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(checkBoxCheat.isSelected()){
+                    allowCheat();
+                }
+                else{
+                    disallowCheat();
+                }
+            }
+        };
+        checkBoxCheat.setOnAction(event);
+
+
+        VBox rightVbox = new VBox(50, checkBoxCheat);
+        rightVbox.setAlignment(Pos.CENTER);
+
+        root.setRight(rightVbox);
+        root.setCenter(vbox);
+
+
+        return root;
+
+
+    }
     public Parent createContentSmartIaVsIa(int rows, int columns, List<Integer> list){
         BorderPane root = new BorderPane();
         root.setPrefSize(600, 800);
@@ -90,10 +137,15 @@ public class Battleshiptest extends Parent {
         game = new Game();
         game.setSmartIaVsIa(rows , columns , list);
 
+        Label label = new Label("GRILLE IA");
+        Label label1 = new Label("GRILLE SMART IA");
+        label1.setAlignment(Pos.CENTER);
+        label.setAlignment(Pos.CENTER);
+
         enemyGrid = new BoardJavafx(this, game.getPlayersList().get(1).getGrid(), false);
         playerGrid = new BoardJavafx(this, game.getPlayersList().get(0).getGrid(), false);
 
-        VBox vbox = new VBox(50, enemyGrid, playerGrid);
+        VBox vbox = new VBox(30, label, enemyGrid, label1 ,playerGrid);
         vbox.setAlignment(Pos.CENTER);
 
         Button buttonNext = new Button("NEXT");

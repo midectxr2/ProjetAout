@@ -27,13 +27,13 @@ public class Ia extends Player{
     //ainsi que d'affciher la grille
     @Override
     public void play(Grid grid){
-        int LastX = random.nextInt(grid.getRows());
-        int LastY = random.nextInt(grid.getColumns());
+        int row = random.nextInt(grid.getRows());
+        int col = random.nextInt(grid.getColumns());
 
 
-        while (!grid.fire(LastX, LastY)){
-            LastX = random.nextInt(grid.getRows());
-            LastY = random.nextInt(grid.getColumns());
+        while (!grid.fire(row, col)){
+            row = random.nextInt(grid.getRows());
+            col = random.nextInt(grid.getColumns());
         }
 
         System.out.println("l'ia basique a tirée en LastX: "+LastX+", LastY: "+LastY);
