@@ -20,7 +20,9 @@ public class Game {
     //cela lance une vraie partie ou l'on peut jouer contre l'ia
     public static void main(String[] args) throws Exception {
         Game game = new Game();
-        game.loadGame("src\\main\\resources\\com\\emile\\projetaout\\grid.txt");
+        //game.loadGame("src\\main\\resources\\com\\emile\\projetaout\\grid.txt");
+        System.out.println("Génération de la grille");
+        game.setPlayerVsIa(10,10, Arrays.asList(2,2,3));
         System.out.println("DEBUT DU JEU");
         game.playGame();
     }
@@ -155,6 +157,8 @@ public class Game {
         playersList.get(1).getGrid().cheatMode();
 
         while (!isFinished()) {
+            System.out.println("--------------");
+            displayAllGrid();
             play();
         }
         boolean p1Win = !playersList.get(1).isFinished();
@@ -169,6 +173,11 @@ public class Game {
     }
 
 
+    public void displayAllGrid(){
+        for (Player p: playersList){
+            p.getGrid().showGrid();
+        }
+    }
 
     //methode qui permet de load un fichier.txt et d'en creer une veritable grille de jeu
     //si l'on rentre une grille qui n'a pas le mm nombre de colonne/grille, une erreur se lance

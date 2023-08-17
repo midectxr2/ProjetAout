@@ -36,8 +36,8 @@ public class Ia extends Player{
             col = random.nextInt(grid.getColumns());
         }
 
-        System.out.println("l'ia basique a tirée en LastX: "+LastX+", LastY: "+LastY);
-        grid.showGrid();
+        //System.out.println("l'ia basique a tirée en row: "+row+", col: "+col);
+        //grid.showGrid();
     }
 
 }

@@ -82,7 +82,7 @@ public class Player {
             Game.clearConsole();
 
         }
-        grid.showGrid();
+        //grid.showGrid();
     }
 
 
@@ -91,7 +91,7 @@ public class Player {
     public boolean play(Cell cell){
         int x = cell.getPosition().getRow();
         int y = cell.getPosition().getCol();
-        System.out.println("Vous avez tiré en x: "+x+", y: "+y);
+        //System.out.println("Vous avez tiré en x: "+x+", y: "+y);
 
         return grid.fire(x, y);
     }
